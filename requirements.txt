@@ -1,0 +1,5 @@
+lxml==4.8.0
+packaging==21.3
+pikepdf==5.1.2
+Pillow==9.1.0
+pyparsing==3.0.8

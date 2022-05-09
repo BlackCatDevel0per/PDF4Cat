@@ -1,0 +1,15 @@
+venv/
+tmp/
+test_data/
+__pycache__
+build/
+dist/
+*.egg-info
+test.py
+*.sqlite3-journal
+*.spec
+*.exe
+*.pyc
+*.bak
+*.whl
+*.zip
