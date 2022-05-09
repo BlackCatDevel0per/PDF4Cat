@@ -3,7 +3,6 @@ import io
 import zipfile
 
 from .cat import PDF4Cat
-from .helpers import run_in_subprocess
 
 class Splitter(PDF4Cat):
    def __init__(self, *args):
@@ -22,7 +21,7 @@ class Splitter(PDF4Cat):
         pdfp = pdata
         yield pdfn, pdfp
 
-   @run_in_subprocess
+   @PDF4Cat.run_in_subprocess
    def split_pages2zip(
       self,
       zip_file: str, 

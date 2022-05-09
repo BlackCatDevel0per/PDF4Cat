@@ -1,8 +1,9 @@
 import os
-import multiprocessing
 from pikepdf import Pdf
 
+
 class PDF4Cat:
+	from .helpers import run_in_subprocess
 	def __init__(self, pdf_file=None, input_pdf_list: list=None, progress_callback=None):
 		if not pdf_file and input_pdf_list:
 			pdf_file = input_pdf_list[0]
@@ -24,6 +25,7 @@ class PDF4Cat:
 		self.counter = 0
 		if not progress_callback:
 			self.progress_callback = self.pc
+
 
 	def pc(self, current, total) -> None:
 		#
