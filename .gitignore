@@ -4,6 +4,8 @@ test_data/
 __pycache__
 build/
 dist/
+git_push.sh
+twine.sh
 *.egg-info
 test.py
 *.sqlite3-journal
