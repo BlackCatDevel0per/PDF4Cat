@@ -12,4 +12,12 @@ PDF4Cat Simple and Power tool for processing pdf docs using pikepdf
 - [ ] Extract Pages
 - [ ] Rotate
 
-## Other things
+## Other things:
+### Add actions with docs:
+- [ ] OCR
+- [ ] DOCX
+- [ ] EXCEL
+- [ ] POWER POINT
+- [ ] JPG
+- [ ] OPEN OFFICE
+
