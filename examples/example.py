@@ -30,6 +30,8 @@ PDF4Cat.Doc(filenames[0]).merge_file_with(filenames[0], output_pdf='test_data/me
 PDF4Cat.Doc(None, filenames).merge_files_to('test_data/merge_files.pdf')
 # Split File Pages
 PDF4Cat.Doc(filenames[0]).split_pages2zip('test_data/splitted.zip', '{num}.pdf', 1)
+# Rotate File Pages
+PDF4Cat.Doc(filenames[0]).rotate_doc_to(90, 'test_data/rotated.pdf')
 c_time = time()
 print()
 print(int(c_time - s_time), "s.")
@@ -59,6 +61,24 @@ print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
 # s_time = time()
 # pdfs = PDF4Cat.Splitter(filenames[0])
 # pdfs.split_pages2zip('test_data/splitted.zip', '{num}.pdf', 1)
+# c_time = time()
+# print()
+# print(int(c_time - s_time), "s.")
+# print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
+
+#######################################
+# """ Decrypt pdf Example """
+# s_time = time()
+# PDF4Cat.Crypter('test_data/encrypted.pdf', passwd="test000000").decrypt_to(output_pdf='test_data/decrypted.pdf')
+# # need save_to or save
+# c_time = time()
+# print()
+# print(int(c_time - s_time), "s.")
+# print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
+
+# """ Rotate File Pages Example """
+# s_time = time()
+# PDF4Cat.Effects(filenames[0]).rotate_doc_to(180, 'test_data/rotated.pdf')
 # c_time = time()
 # print()
 # print(int(c_time - s_time), "s.")

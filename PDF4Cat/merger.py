@@ -6,6 +6,8 @@ class Merger(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Merger, self).__init__(*args, **kwargs)
 
+	# need in_memory merge func
+
 	@PDF4Cat.run_in_subprocess
 	def merge_file_with(self, input_pdf, output_pdf = None) -> None:
 		if not output_pdf:
@@ -21,11 +23,13 @@ class Merger(PDF4Cat):
 				del page
 				self.counter += 1
 				self.progress_callback(self.counter, total)
+			src.close()
 			del src
 
 		self.counter = 0
 
 		pdf.save(output_pdf)
+		pdf.close()
 		del pdf
 
 	@PDF4Cat.run_in_subprocess
@@ -45,9 +49,11 @@ class Merger(PDF4Cat):
 				del page
 				self.counter += 1
 				self.progress_callback(self.counter, total)
+			src.close()
 			del src
 
 		self.counter = 0
 
 		pdf.save(output_pdf)
+		pdf.close()
 		del pdf

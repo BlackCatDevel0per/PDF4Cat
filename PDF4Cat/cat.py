@@ -4,7 +4,11 @@ import pikepdf
 
 class PDF4Cat:
 	from .helpers import run_in_subprocess
-	def __init__(self, pdf_file=None, input_pdf_list: list=None, passwd: str='', progress_callback=None):
+	def __init__(self, 
+		pdf_file=None, 
+		input_pdf_list: list=None, 
+		passwd: str='', 
+		progress_callback=None):
 		if not pdf_file and input_pdf_list:
 			pdf_file = input_pdf_list[0]
 		elif pdf_file:
@@ -31,6 +35,11 @@ class PDF4Cat:
 		if not progress_callback:
 			self.progress_callback = self.pc
 
+	# def save(self, output_pdf):
+	# 	self.pdf.save(output_pdf)
+
+	# def close(self, pdf):
+	# 	pdf.close()
 
 	def pc(self, current, total) -> None:
 		#
@@ -43,6 +52,3 @@ class PDF4Cat:
 	@property
 	def pages_count(self) -> int:
 		return len(self.pdf.pages)
-
-	def save(self, output_pdf):
-		self.pdf.save(output_pdf)
