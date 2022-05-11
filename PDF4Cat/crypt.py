@@ -32,8 +32,8 @@ class Crypter(PDF4Cat):
 			allow=self.pdfPermissions(**perm)
 			))
 
-	def decrypt(self, output_pdf: str = None) -> None:
+	def decrypt_to(self, output_pdf = None) -> None: # like save
 		if not output_pdf:
 			output_pdf = os.path.join(self.pdf_path, self.pdf_name+"_out.pdf")
 
-		self.pdf.save(output_pdf, password=self.passwd)
+		self.pdf.save(output_pdf)

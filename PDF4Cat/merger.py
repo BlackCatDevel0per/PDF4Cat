@@ -7,7 +7,7 @@ class Merger(PDF4Cat):
 		super(Merger, self).__init__(*args, **kwargs)
 
 	@PDF4Cat.run_in_subprocess
-	def merge_file_with(self, input_pdf: str, output_pdf: str = None) -> None:
+	def merge_file_with(self, input_pdf, output_pdf = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.pdf_path, self.pdf_name)
 		pdf = self.pdf_new()
@@ -29,7 +29,7 @@ class Merger(PDF4Cat):
 		del pdf
 
 	@PDF4Cat.run_in_subprocess
-	def merge_files_to(self, output_pdf: str = None) -> None:
+	def merge_files_to(self, output_pdf = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.pdf_path, self.pdf_name)
 		pdf = self.pdf_new()

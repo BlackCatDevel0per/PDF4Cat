@@ -4,7 +4,7 @@ import pikepdf
 
 class PDF4Cat:
 	from .helpers import run_in_subprocess
-	def __init__(self, pdf_file=None, input_pdf_list: list=None, passwd: str=None, progress_callback=None):
+	def __init__(self, pdf_file=None, input_pdf_list: list=None, passwd: str='', progress_callback=None):
 		if not pdf_file and input_pdf_list:
 			pdf_file = input_pdf_list[0]
 		elif pdf_file:
@@ -23,8 +23,8 @@ class PDF4Cat:
 		self.pdfEncryption = pikepdf.Encryption
 		self.pdfPermissions = pikepdf.Permissions
 
-		self.pdf = self.pdf_open(pdf_file)
 		self.passwd = passwd
+		self.pdf = self.pdf_open(pdf_file, password=passwd)
 
 		self.progress_callback = progress_callback
 		self.counter = 0

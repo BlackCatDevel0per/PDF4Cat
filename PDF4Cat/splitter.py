@@ -24,12 +24,12 @@ class Splitter(PDF4Cat):
    @PDF4Cat.run_in_subprocess
    def split_pages2zip(
       self,
-      zip_file: str, 
+      out_zip_file: str, 
       fpages: str = '{name}_{num}.pdf',
       start_from: int = 0) -> None:
 
       # Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
-      with zipfile.ZipFile(zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
+      with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
 
          for file_name, data in self.gen_split(fpages, start_from):
             zf.writestr(file_name, data.getvalue())
