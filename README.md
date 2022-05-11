@@ -11,7 +11,7 @@ PDF4Cat Simple and Power tool for processing pdf docs using pikepdf
 - [ ] Extract Pages
 - [ ] Protect (Encrypt)
 - [X] Unlock (Decrypt)
-- [ ] Compress
+- [X] Compress (Flate)
 - [X] Rotate
 
 ## Other things:
