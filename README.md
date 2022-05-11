@@ -6,17 +6,17 @@ PDF4Cat Simple and Power tool for processing pdf docs using pikepdf
 ## PDF:
 - [X] Merge
 - [X] Split
-- [ ] Pdf to Images
-- [ ] Images to pdf
-- [ ] Protect (Encrypt)
-- [X] Unlock (Decrypt)
-- [ ] Compress
 - [ ] Edit Pages
 - [ ] Delete Pages
 - [ ] Extract Pages
+- [ ] Protect (Encrypt)
+- [X] Unlock (Decrypt)
+- [ ] Compress
 - [X] Rotate
 
 ## Other things:
+- [ ] Pdf to Images
+- [ ] Images to pdf
 ### Add actions with docs:
 - [ ] OCR
 - [ ] DOCX

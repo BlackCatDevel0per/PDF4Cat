@@ -32,6 +32,8 @@ PDF4Cat.Doc(None, filenames).merge_files_to('test_data/merge_files.pdf')
 PDF4Cat.Doc(filenames[0]).split_pages2zip('test_data/splitted.zip', '{num}.pdf', 1)
 # Rotate File Pages
 PDF4Cat.Doc(filenames[0]).rotate_doc_to(90, 'test_data/rotated.pdf')
+# Flate Compress File
+PDF4Cat.Doc(filenames[0]).ReFlate_to('test_data/re_flated.pdf')
 c_time = time()
 print()
 print(int(c_time - s_time), "s.")
