@@ -3,8 +3,8 @@ import os
 from .cat import PDF4Cat
 
 class Merger(PDF4Cat):
-	def __init__(self, *args):
-		super(Merger, self).__init__(*args)
+	def __init__(self, *args, **kwargs):
+		super(Merger, self).__init__(*args, **kwargs)
 
 	@PDF4Cat.run_in_subprocess
 	def merge_file_with(self, input_pdf: str, output_pdf: str = None) -> None:

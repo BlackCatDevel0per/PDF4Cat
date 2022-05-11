@@ -5,8 +5,8 @@ import zipfile
 from .cat import PDF4Cat
 
 class Splitter(PDF4Cat):
-   def __init__(self, *args):
-      super(Splitter, self).__init__(*args)
+   def __init__(self, *args, **kwargs):
+      super(Splitter, self).__init__(*args, **kwargs)
 
    # Generate name with BytesIO object (it is faster)
    def gen_split(self, fpages, start_from) -> tuple:

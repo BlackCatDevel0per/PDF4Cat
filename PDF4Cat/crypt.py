@@ -3,8 +3,8 @@ import os
 from .cat import PDF4Cat
 
 class Crypter(PDF4Cat):
-	def __init__(self, *args):
-		super(Crypter, self).__init__(*args)
+	def __init__(self, *args, **kwargs):
+		super(Crypter, self).__init__(*args, **kwargs)
 
 	# @PDF4Cat.run_in_subprocess
 	def crypt_to(self, user_passwd: str = None, 
@@ -14,7 +14,7 @@ class Crypter(PDF4Cat):
 		output_pdf: str = None) -> None:
 
 		if not output_pdf:
-			output_pdf = os.path.join(self.pdf_path, self.pdf_name)
+			output_pdf = os.path.join(self.pdf_path, self.pdf_name+"_out.pdf")
 
 		if not perm:
 			perm = {'extract': False,}
@@ -32,7 +32,8 @@ class Crypter(PDF4Cat):
 			allow=self.pdfPermissions(**perm)
 			))
 
-	def decrypt(self, passwd: str, output_pdf: str = None) -> None:
-		pass
+	def decrypt(self, output_pdf: str = None) -> None:
+		if not output_pdf:
+			output_pdf = os.path.join(self.pdf_path, self.pdf_name+"_out.pdf")
 
-
+		self.pdf.save(output_pdf, password=self.passwd)
