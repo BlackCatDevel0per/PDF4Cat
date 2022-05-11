@@ -9,7 +9,7 @@ class Merger(PDF4Cat):
 	@PDF4Cat.run_in_subprocess
 	def merge_file_with(self, input_pdf, output_pdf = None) -> None:
 		if not output_pdf:
-			output_pdf = os.path.join(self.pdf_path, self.pdf_name)
+			output_pdf = os.path.join(self.pdf_path, self.pdf_name+"_out.pdf")
 		pdf = self.pdf_new()
 
 		input_pdf_pages_count = len(self.pdf_open(input_pdf).pages)
@@ -31,7 +31,7 @@ class Merger(PDF4Cat):
 	@PDF4Cat.run_in_subprocess
 	def merge_files_to(self, output_pdf = None) -> None:
 		if not output_pdf:
-			output_pdf = os.path.join(self.pdf_path, self.pdf_name)
+			output_pdf = os.path.join(self.pdf_path, self.pdf_name+"_out.pdf")
 		pdf = self.pdf_new()
 
 		input_pdf_pages_count = 0
