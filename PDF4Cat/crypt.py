@@ -36,4 +36,5 @@ class Crypter(PDF4Cat):
 		if not output_pdf:
 			output_pdf = os.path.join(self.pdf_path, self.pdf_name+"_out.pdf")
 
-		self.pdf.save(output_pdf)
+		# self.pdf.save(output_pdf)
+		self.save(output_pdf)

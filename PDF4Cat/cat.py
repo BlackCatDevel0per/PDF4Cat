@@ -43,3 +43,6 @@ class PDF4Cat:
 	@property
 	def pages_count(self) -> int:
 		return len(self.pdf.pages)
+
+	def save(self, output_pdf):
+		self.pdf.save(output_pdf)
