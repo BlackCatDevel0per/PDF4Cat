@@ -1,5 +1,5 @@
 import os
-from pikepdf import Pdf
+import pikepdf
 
 
 class PDF4Cat:
@@ -17,9 +17,11 @@ class PDF4Cat:
 		self.pdf_name = os.path.basename(os.path.splitext(pdf_file)[0])
 		self.pdf_filename = os.path.basename(pdf_file)
 
-		self.pdf_new = Pdf.new
-		self.pdf_open = Pdf.open
+		self.pdf_new = pikepdf.Pdf.new
+		self.pdf_open = pikepdf.Pdf.open
 		self.pdf = self.pdf_open(pdf_file)
+
+		self.pdfEncryption = pikepdf.Encryption
 
 		self.progress_callback = progress_callback
 		self.counter = 0

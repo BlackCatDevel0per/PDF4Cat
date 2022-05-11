@@ -5,6 +5,8 @@ PDF4Cat Simple and Power tool for processing pdf docs using pikepdf
 ## PDF:
 - [X] Merge
 - [X] Split
+- [ ] Pdf to Images
+- [ ] Images to pdf
 - [ ] Protect & Unlock
 - [ ] Compress
 - [ ] Edit Pages
