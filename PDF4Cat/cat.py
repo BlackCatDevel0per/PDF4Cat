@@ -19,9 +19,11 @@ class PDF4Cat:
 
 		self.pdf_new = pikepdf.Pdf.new
 		self.pdf_open = pikepdf.Pdf.open
-		self.pdf = self.pdf_open(pdf_file)
 
 		self.pdfEncryption = pikepdf.Encryption
+		self.pdfPermissions = pikepdf.Permissions
+		
+		self.pdf = self.pdf_open(pdf_file)
 
 		self.progress_callback = progress_callback
 		self.counter = 0

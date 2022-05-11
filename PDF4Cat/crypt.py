@@ -6,7 +6,13 @@ class Crypter(PDF4Cat):
 	def __init__(self, *args):
 		super(Crypter, self).__init__(*args)
 
-	def crypt_to(self, user_passwd: str = None, owner_passwd: str = None, perm: dict = None, output_pdf: str = None) -> None:
+	# @PDF4Cat.run_in_subprocess
+	def crypt_to(self, user_passwd: str = None, 
+		owner_passwd: str = None, 
+		perm: dict = None, 
+		R: int = 4, 
+		output_pdf: str = None) -> None:
+
 		if not output_pdf:
 			output_pdf = os.path.join(self.pdf_path, self.pdf_name)
 
@@ -22,7 +28,8 @@ class Crypter(PDF4Cat):
 
 
 		self.pdf.save(output_pdf, encryption=self.pdfEncryption(
-			user=user_passwd, owner=owner_passwd
+			user=user_passwd, owner=owner_passwd, R=R,
+			allow=self.pdfPermissions(**perm)
 			))
 
 	def decrypt(self, passwd: str, output_pdf: str = None) -> None:
