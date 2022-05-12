@@ -1,6 +1,8 @@
 import os
 import pikepdf
 
+import fitz
+
 
 class PDF4Cat:
 	from .helpers import run_in_subprocess
@@ -79,9 +81,9 @@ class Base:
 		if not progress_callback:
 			self.progress_callback = self.pc
 
-		self.pdf_new = pikepdf.Pdf.new
 		self.pdf_image = pikepdf.PdfImage
-		self.pdf_open = pikepdf.Pdf.open
+		self.pdf_open = fitz.open
+		self.fitz_Matrix = fitz.Matrix
 
 	def pc(self, current, total) -> None:
 		#
