@@ -28,7 +28,7 @@ class Img2Pdf(Base):
 			yield imfn, imfi
 
 	@Base.run_in_subprocess
-	def imgs2pdf_zip(self, 
+	def imgs2pdfs_zip(self, 
 		out_zip_file: str, 
 		fimages: str = '{name}_{num}.pdf',
 		start_from: int = 0) -> None:

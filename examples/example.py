@@ -45,7 +45,7 @@ PDF4Cat.Effects(filenames[0]).rotate_doc_to(180, 'test_data/rotated.pdf')
 # Convert image to pdf
 PDF4Cat.Converter('test_data/test.png').img2pdf('test_data/img2pdf.pdf')
 # Multiple convert images to pdf and compress to zip
-PDF4Cat.Converter(None, imgfilenames).imgs2pdf_zip('test_data/imgs2pdf.zip')
+PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdf.zip')
 c_time = time()
 print()
 print(int(c_time - s_time), "s.")
@@ -109,7 +109,7 @@ print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
 
 # """ Convert Images to Pdf and compress to zip """
 # s_time = time()
-# PDF4Cat.Converter(None, imgfilenames).imgs2pdf_zip('test_data/imgs2pdf.zip')
+# PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdf.zip')
 # c_time = time()
 # print()
 # print(int(c_time - s_time), "s.")
