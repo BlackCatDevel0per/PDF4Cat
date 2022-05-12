@@ -15,10 +15,10 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 - [X] Rotate
 
 ## Other things:
-- [ ] Pdf to Images
+- [ ] OCR pdf
+- [X] Pdf to Images
 - [X] Images to pdf
 ### Add actions with docs:
-- [ ] OCR
 - [ ] DOCX
 - [ ] EXCEL
 - [ ] POWER POINT
