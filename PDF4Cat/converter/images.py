@@ -74,19 +74,19 @@ class Img2Pdf(Base):
 class Pdf2Img(Base):
 	def __init__(self, *args, **kwargs):
 		super(Pdf2Img, self).__init__(*args, **kwargs)
-# 		self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
+		self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
 
-# 	# @Base.rusn_in_subprocess
-# 	def pdf2img(self, 
-# 		output_img = None,
-# 		format: str = None) -> None:
-# 		if not output_img:
-# 			output_img = os.path.join(self.doc_path, self.doc_name+"_out.jpg")
-# 		if not format:
-# 			format = os.path.splitext(self.doc_file)[1][1:]
+	# @Base.rusn_in_subprocess
+	def pdf2img(self, 
+		output_img = None,
+		format: str = None) -> None:
+		if not output_img:
+			output_img = os.path.join(self.doc_path, self.doc_name+"_out.jpg")
+		if not format:
+			format = os.path.splitext(self.doc_file)[1][1:]
 
-# 		for page in self.pdf.pages:
-# 			print(page.keys())
+		for page in self.pdf.pages:
+			print(page.keys())
 
 
 	# @Base.run_in_subprocess
