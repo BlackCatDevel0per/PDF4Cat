@@ -40,7 +40,7 @@ PDF4Cat.Doc(filenames[0]).split_pages2zip('test_data/splitted.zip', '{num}.pdf',
 PDF4Cat.Doc(filenames[0]).rotate_doc_to(90, 'test_data/rotated.pdf')
 # Flate Compress pdf
 PDF4Cat.Doc(filenames[0]).ReFlate_to('test_data/re_flated.pdf')
-# Recompress pdf flate (optimize & compress)
+# or
 PDF4Cat.PdfOptimizer(filenames[0]).ReFlate_to('test_data/re_flated.pdf')
 # Rotate pdf Pages
 PDF4Cat.Effects(filenames[0]).rotate_doc_to(180, 'test_data/rotated.pdf')
@@ -50,6 +50,18 @@ PDF4Cat.Converter('test_data/test.png').img2pdf('test_data/img2pdf.pdf')
 PDF4Cat.Converter(None, imgfilenames).imgs2pdf('test_data/imgs2pdf.pdf')
 # Multiple convert images to pdfs and compress to zip
 PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdfs.zip')
+
+# Convert image to pdf
+PDF4Cat.Converter('test_data/test.png').img2pdf('test_data/img2pdf.pdf')
+# Convert multiple images to pdf
+PDF4Cat.Converter(None, imgfilenames).imgs2pdf('test_data/imgs2pdfs.pdf')
+# Convert multiple images to pdfs and compress to zip
+PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdf.zip')
+
+# Convert pdf to images and compress to zip
+PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs.zip')
+# Convert pdf to images with select pages and compress to zip
+PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs10515.zip', pages=[10, 5, 15])
 c_time = time()
 print()
 print(int(c_time - s_time), "s.")

@@ -1,5 +1,6 @@
 import os
 import io
+from PIL import Image
 import zipfile
 
 from ..cat import PDF4Cat
@@ -10,24 +11,18 @@ class Img2Pdf(PDF4Cat):
 
 	@PDF4Cat.run_in_subprocess
 	def img2pdf(self, 
-		output_pdf = None,
-		format: str = None) -> None:
+		output_pdf = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
-		if not format:
-			format = os.path.splitext(self.doc_file)[1][1:]
 
-		pix = self.fitz_Pixmap(self.doc_file)#.tobytes(output=format)
+		pix = self.fitz_Pixmap(self.doc_file)
 		pix.save(output_pdf)
 
 	@PDF4Cat.run_in_subprocess
 	def imgs2pdf(self, 
-		output_pdf = None,
-		format: str = None) -> None:
+		output_pdf = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
-		# if not format:
-		# 	format = os.path.splitext(self.doc_file)[1][1:]
 
 		input_imgs_list = []
 		len_docs = len(self.input_doc_list)
@@ -42,7 +37,7 @@ class Img2Pdf(PDF4Cat):
 			append_images=input_imgs_list[1:]) # No format
 
 	# Generate name with BytesIO object (it is faster)
-	def gen_images(self, fimages, start_from) -> tuple:
+	def gen_imagesi2p(self, fimages, start_from) -> tuple:
 		for num, img in enumerate(self.input_doc_list): ###
 			io_data = io.BytesIO()
 			img_ext = os.path.splitext(img)[1][1:]
@@ -61,7 +56,7 @@ class Img2Pdf(PDF4Cat):
 		# Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
 		with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
 
-			for file_name, io_data in self.gen_images(fimages, start_from):
+			for file_name, io_data in self.gen_imagesi2p(fimages, start_from):
 				zf.writestr(file_name, io_data.getvalue())
 				self.counter += 1 #need enumerate
 				self.progress_callback(self.counter, len(self.input_doc_list))

@@ -11,13 +11,13 @@ class Merger(PDF4Cat):
 	@PDF4Cat.run_in_subprocess
 	def merge_file_with(self, input_pdf, output_pdf = None) -> None:
 		if not output_pdf:
-			output_pdf = os.path.join(self.pdf_path, self.pdf_name+"_out.pdf")
+			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		pdf = self.pdf_new()
 
-		input_pdf_pages_count = len(self.pdf_open(input_pdf).pages)
+		input_pdf_pages_count = len(self.pike_open(input_pdf).pages)
 		total = self.pages_count + input_pdf_pages_count
-		for file in (self.pdf_file, input_pdf):
-			src = self.pdf_open(file)
+		for file in (self.doc_file, input_pdf):
+			src = self.pike_open(file)
 			for page in src.pages: ###
 				pdf.pages.append(page)
 				del page
@@ -35,15 +35,15 @@ class Merger(PDF4Cat):
 	@PDF4Cat.run_in_subprocess
 	def merge_files_to(self, output_pdf = None) -> None:
 		if not output_pdf:
-			output_pdf = os.path.join(self.pdf_path, self.pdf_name+"_out.pdf")
+			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		pdf = self.pdf_new()
 
 		input_pdf_pages_count = 0
-		for ipdf in self.input_pdf_list:
-			input_pdf_pages_count += len(self.pdf_open(ipdf).pages)
+		for ipdf in self.input_doc_list:
+			input_pdf_pages_count += len(self.pike_open(ipdf).pages)
 		total = input_pdf_pages_count
-		for file in self.input_pdf_list:
-			src = self.pdf_open(file)
+		for file in self.input_doc_list:
+			src = self.pike_open(file)
 			for page in src.pages: ###
 				pdf.pages.append(page)
 				del page

@@ -1,5 +1,6 @@
 import os
 import fitz
+import pikepdf
 
 class PDF4Cat:
 	from .helpers import run_in_subprocess
@@ -19,17 +20,25 @@ class PDF4Cat:
 		self.doc_path = os.path.split(doc_file)[0]
 		self.doc_name = os.path.basename(os.path.splitext(doc_file)[0])
 		self.doc_filename = os.path.basename(doc_file)
+		self.doc_fileext = os.path.splitext(doc_file)[1]
 
+		""" PyMuPDF methods """
+		self.pdf_open = fitz.open
+		self.fitz_Pixmap = fitz.Pixmap
+		self.fitz_Matrix = fitz.Matrix
+
+		""" pikepdf methods """
+		self.pike_open = pikepdf.Pdf.open ###
+		self.pdf_new = pikepdf.Pdf.new
+		self.pdfEncryption = pikepdf.Encryption
+		self.pdfPermissions = pikepdf.Permissions
+		
 		self.passwd = passwd
 
 		self.progress_callback = progress_callback
 		self.counter = 0
 		if not progress_callback:
 			self.progress_callback = self.pc
-
-		self.pdf_open = fitz.open
-		self.fitz_Pixmap = fitz.Pixmap
-		self.fitz_Matrix = fitz.Matrix
 
 	def pc(self, current, total) -> None:
 		#
@@ -38,6 +47,10 @@ class PDF4Cat:
 		# 	print(f'Progress: {current} of {total} complete', end="\r")
 		# else:
 		# 	print(f'Progress: {current} of {total} complete')
+
+	@property
+	def pages_count(self) -> int:
+		return len(self.pdf.pages)
 
 
 # class PDF4Cat:

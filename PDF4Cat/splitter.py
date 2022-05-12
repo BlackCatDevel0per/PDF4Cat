@@ -7,6 +7,7 @@ from .cat import PDF4Cat
 class Splitter(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Splitter, self).__init__(*args, **kwargs)
+		self.pdf = self.pike_open(self.doc_file)
 
 	# Generate name with BytesIO object (it is faster)
 	def gen_split(self, fpages, start_from) -> tuple:
@@ -18,7 +19,7 @@ class Splitter(PDF4Cat):
 			dst.close()
 			del dst
 
-			pdfn = fpages.format(name=self.pdf_filename, num=num+start_from)
+			pdfn = fpages.format(name=self.doc_filename, num=num+start_from)
 			pdfp = io_data
 			yield pdfn, pdfp
 
