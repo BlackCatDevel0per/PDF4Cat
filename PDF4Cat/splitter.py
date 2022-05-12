@@ -22,7 +22,7 @@ class Splitter(PDF4Cat):
 			pdfp = io_data
 			yield pdfn, pdfp
 
-	@PDF4Cat.run_in_subprocess
+	@PDF4Cat.run_in_subprocess # need add range
 	def split_pages2zip(
 		self,
 		out_zip_file: str, 
