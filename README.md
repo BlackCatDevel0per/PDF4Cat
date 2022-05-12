@@ -16,7 +16,7 @@ PDF4Cat Simple and Power tool for processing pdf docs using pikepdf
 
 ## Other things:
 - [ ] Pdf to Images
-- [ ] Images to pdf
+- [X] Images to pdf
 ### Add actions with docs:
 - [ ] OCR
 - [ ] DOCX

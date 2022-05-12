@@ -52,3 +52,38 @@ class PDF4Cat:
 	@property
 	def pages_count(self) -> int:
 		return len(self.pdf.pages)
+
+class Base:
+	from .helpers import run_in_subprocess
+	def __init__(self, 
+		doc_file=None, 
+		input_doc_list: list=None, 
+		passwd: str='', 
+		progress_callback=None):
+		if not doc_file and input_doc_list:
+			doc_file = input_doc_list[0]
+		elif doc_file:
+			pass
+		else:
+			raise TypeError("Required 1 argument of doc_file, input_doc_list. ")
+		self.input_doc_list = input_doc_list
+		self.doc_file = doc_file
+		self.doc_path = os.path.split(doc_file)[0]
+		self.doc_name = os.path.basename(os.path.splitext(doc_file)[0])
+		self.doc_filename = os.path.basename(doc_file)
+
+		self.passwd = passwd
+
+		self.progress_callback = progress_callback
+		self.counter = 0
+		if not progress_callback:
+			self.progress_callback = self.pc
+
+	def pc(self, current, total) -> None:
+		#
+		print(f'Progress: {current} of {total} complete', end="\r")
+		# if current != total:
+		# 	print(f'Progress: {current} of {total} complete', end="\r")
+		# else:
+		# 	print(f'Progress: {current} of {total} complete')
+

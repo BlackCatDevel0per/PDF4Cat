@@ -13,13 +13,13 @@ class Splitter(PDF4Cat):
 		for num, page in enumerate(self.pdf.pages): ###
 			dst = self.pdf_new()
 			dst.pages.append(page)
-			pdata = io.BytesIO()
-			dst.save(pdata)
+			io_data = io.BytesIO()
+			dst.save(io_data)
 			dst.close()
 			del dst
 
 			pdfn = fpages.format(name=self.pdf_filename, num=num+start_from)
-			pdfp = pdata
+			pdfp = io_data
 			yield pdfn, pdfp
 
 	@PDF4Cat.run_in_subprocess
@@ -32,9 +32,9 @@ class Splitter(PDF4Cat):
 		# Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
 		with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
 
-			for file_name, data in self.gen_split(fpages, start_from):
-				zf.writestr(file_name, data.getvalue())
-				self.counter += 1
+			for file_name, io_data in self.gen_split(fpages, start_from):
+				zf.writestr(file_name, io_data.getvalue())
+				self.counter += 1 #need enumerate
 				self.progress_callback(self.counter, self.pages_count)
 
 		self.counter = 0
