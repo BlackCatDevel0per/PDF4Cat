@@ -16,6 +16,19 @@ class Img2Pdf(Base):
 
 		Image.open(self.doc_file).convert('RGB').save(output_pdf)
 
+	@Base.run_in_subprocess
+	def imgs2pdf(self, 
+		output_pdf: str) -> None:
+		if not output_pdf:
+			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
+
+		input_imgs_list = []
+		for img in self.input_doc_list:
+			img = Image.open(self.doc_file).convert('RGB')
+			input_imgs_list.append(img)
+
+		input_imgs_list[0].save(output_pdf, save_all=True, append_images=input_imgs_list[1:])
+
 	# Generate name with BytesIO object (it is faster)
 	def gen_images(self, fimages, start_from) -> tuple:
 		for num, img in enumerate(self.input_doc_list): ###

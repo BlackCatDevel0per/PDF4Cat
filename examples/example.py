@@ -40,16 +40,22 @@ PDF4Cat.Doc(filenames[0]).split_pages2zip('test_data/splitted.zip', '{num}.pdf',
 PDF4Cat.Doc(filenames[0]).rotate_doc_to(90, 'test_data/rotated.pdf')
 # Flate Compress pdf
 PDF4Cat.Doc(filenames[0]).ReFlate_to('test_data/re_flated.pdf')
+# Recompress pdf flate (optimize & compress)
+PDF4Cat.PdfOptimizer(filenames[0]).ReFlate_to('test_data/re_flated.pdf')
 # Rotate pdf Pages
 PDF4Cat.Effects(filenames[0]).rotate_doc_to(180, 'test_data/rotated.pdf')
 # Convert image to pdf
 PDF4Cat.Converter('test_data/test.png').img2pdf('test_data/img2pdf.pdf')
-# Multiple convert images to pdf and compress to zip
-PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdf.zip')
+# Convert images to pdf
+PDF4Cat.Converter(None, imgfilenames).imgs2pdf('test_data/imgs2pdf.pdf')
+# Multiple convert images to pdfs and compress to zip
+PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdfs.zip')
 c_time = time()
 print()
 print(int(c_time - s_time), "s.")
 print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
+
+#
 
 """ Advanced Use Example"""
 # """ Merge pdf files """
@@ -99,7 +105,7 @@ print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
 # print(int(c_time - s_time), "s.")
 # print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
 
-# """ Convert Images to Pdf """
+# """ Convert Image to Pdf """
 # s_time = time()
 # PDF4Cat.Converter('test_data/test.png').img2pdf('test_data/img2pdf.pdf')
 # c_time = time()
@@ -107,9 +113,17 @@ print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
 # print(int(c_time - s_time), "s.")
 # print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
 
-# """ Convert Images to Pdf and compress to zip """
+# """ Convert Images to Pdf """
 # s_time = time()
-# PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdf.zip')
+# PDF4Cat.Converter(None, imgfilenames).imgs2pdf('test_data/imgs2pdf.pdf')
+# c_time = time()
+# print()
+# print(int(c_time - s_time), "s.")
+# print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, "KB.")
+
+# """ Convert Images to Pdfs and compress to zip """
+# s_time = time()
+# PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdfs.zip')
 # c_time = time()
 # print()
 # print(int(c_time - s_time), "s.")
