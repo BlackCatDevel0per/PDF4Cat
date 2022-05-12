@@ -10,21 +10,28 @@ class Img2Pdf(Base):
 		super(Img2Pdf, self).__init__(*args, **kwargs)
 
 	@Base.run_in_subprocess
-	def img2pdf(self, output_pdf = None):
+	def img2pdf(self, 
+		output_pdf = None,
+		format: str = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
+		if not format:
+			format = os.path.splitext(img)[1][1:]
 
-		Image.open(self.doc_file).convert('RGB').save(output_pdf)
+		Image.open(self.doc_file).convert('RGB').save(output_pdf, format=format)
 
 	@Base.run_in_subprocess
 	def imgs2pdf(self, 
-		output_pdf: str) -> None:
+		output_pdf = None,
+		format: str = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
+		if not format:
+			format = os.path.splitext(img)[1][1:]
 
 		input_imgs_list = []
 		for img in self.input_doc_list:
-			img = Image.open(self.doc_file).convert('RGB')
+			img = Image.open(self.doc_file).convert('RGB', format=format)
 			input_imgs_list.append(img)
 
 		input_imgs_list[0].save(output_pdf, save_all=True, append_images=input_imgs_list[1:])
