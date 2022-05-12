@@ -81,7 +81,7 @@ class Pdf2Img(Base):
 			format = os.path.splitext(self.doc_file)[1][1:]
 
 		for page in self.pdf.pages:
-			print(page.images.keys())
+			print(page.keys())
 
 
 	# @Base.run_in_subprocess
