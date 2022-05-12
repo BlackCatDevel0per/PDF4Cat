@@ -1,16 +1,14 @@
 import os
 import io
 import zipfile
-from PIL import Image
 
-from ..cat import Base
 from ..cat import PDF4Cat
 
-class Img2Pdf(Base):
+class Img2Pdf(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Img2Pdf, self).__init__(*args, **kwargs)
 
-	@Base.run_in_subprocess
+	@PDF4Cat.run_in_subprocess
 	def img2pdf(self, 
 		output_pdf = None,
 		format: str = None) -> None:
@@ -21,7 +19,7 @@ class Img2Pdf(Base):
 
 		Image.open(self.doc_file).convert('RGB').save(output_pdf, format=format)
 
-	@Base.run_in_subprocess
+	@PDF4Cat.run_in_subprocess
 	def imgs2pdf(self, 
 		output_pdf = None,
 		format: str = None) -> None:
@@ -53,7 +51,7 @@ class Img2Pdf(Base):
 			imfi = io_data
 			yield imfn, imfi
 
-	@Base.run_in_subprocess
+	@PDF4Cat.run_in_subprocess
 	def imgs2pdfs_zip(self, 
 		out_zip_file: str, 
 		fimages: str = '{name}_{num}.pdf',
@@ -71,19 +69,23 @@ class Img2Pdf(Base):
 
 #
 
-class Pdf2Img(Base):
+class Pdf2Img(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Pdf2Img, self).__init__(*args, **kwargs)
 		# self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
 		self.pdf = self.pdf_open(self.doc_file)
 
 	# Generate name with BytesIO object (it is faster)
-	def _gen_images(self, fimages, start_from) -> tuple:
+	def _gen_images(self, pages, fimages, start_from) -> tuple:
 		ext_from_fimages = os.path.splitext(fimages)[1][1:]
 		zoom = 2 # to increase the resolution
 		mat = self.fitz_Matrix(zoom, zoom)
-		noOfPages = self.pdf.pageCount
-		for pageNo in range(noOfPages):
+		noOfPages = range(self.pdf.pageCount)
+		if pages:
+			noOfPages = pages
+		for pageNo in noOfPages:
+			if pages and pageNo not in pages:
+				continue
 			io_data = io.BytesIO()
 			#
 			page = self.pdf.load_page(pageNo) #number of page
@@ -95,21 +97,25 @@ class Pdf2Img(Base):
 			imfi = io_data
 			yield imfn, imfi
 
-	@Base.run_in_subprocess
+	@PDF4Cat.run_in_subprocess
 	def pdf2imgs_zip(self, 
 		out_zip_file: str, 
+		pages: list = [],
 		fimages: str = '{name}_{num}.png',
 		start_from: int = 0) -> None:
 		
-		pcount = self.pdf.pageCount
+		if not pages:
+			pcount = self.pdf.pageCount
+		else:
+			pcount = len(pages)
 
 		# Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
 		with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
 		
-			for file_name, io_data in self._gen_images(fimages, start_from):
+			for file_name, io_data in self._gen_images(pages, fimages, start_from):
 				zf.writestr(file_name, io_data.getvalue())
 				self.counter += 1 #need enumerate
 				self.progress_callback(self.counter, pcount)
 
 		self.counter = 0
-		
+
