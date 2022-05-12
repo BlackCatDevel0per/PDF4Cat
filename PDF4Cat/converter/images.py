@@ -21,21 +21,26 @@ class Img2Pdf(Base):
 
 		Image.open(self.doc_file).convert('RGB').save(output_pdf, format=format)
 
-	# @Base.run_in_subprocess
+	@Base.run_in_subprocess
 	def imgs2pdf(self, 
 		output_pdf = None,
 		format: str = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
-		if not format:
-			format = os.path.splitext(self.doc_file)[1][1:]
+		# if not format:
+		# 	format = os.path.splitext(self.doc_file)[1][1:]
 
 		input_imgs_list = []
-		for img in self.input_doc_list:
-			img = Image.open(self.doc_file).convert('RGB')
-			input_imgs_list.append(img)
+		len_docs = len(self.input_doc_list)
 
-		input_imgs_list[0].save(output_pdf, save_all=True, append_images=input_imgs_list[1:], format=format)
+		for img_path in self.input_doc_list:
+			input_imgs_list.append(Image.open(img_path).convert('RGB'))
+			self.counter += 1
+			self.progress_callback(self.counter, len_docs)
+
+		input_imgs_list[0].save(output_pdf, 
+			save_all=True, 
+			append_images=input_imgs_list[1:]) # No format
 
 	# Generate name with BytesIO object (it is faster)
 	def gen_images(self, fimages, start_from) -> tuple:
@@ -69,19 +74,19 @@ class Img2Pdf(Base):
 class Pdf2Img(Base):
 	def __init__(self, *args, **kwargs):
 		super(Pdf2Img, self).__init__(*args, **kwargs)
-		self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
+# 		self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
 
-	# @Base.rusn_in_subprocess
-	def pdf2img(self, 
-		output_img = None,
-		format: str = None) -> None:
-		if not output_img:
-			output_img = os.path.join(self.doc_path, self.doc_name+"_out.jpg")
-		if not format:
-			format = os.path.splitext(self.doc_file)[1][1:]
+# 	# @Base.rusn_in_subprocess
+# 	def pdf2img(self, 
+# 		output_img = None,
+# 		format: str = None) -> None:
+# 		if not output_img:
+# 			output_img = os.path.join(self.doc_path, self.doc_name+"_out.jpg")
+# 		if not format:
+# 			format = os.path.splitext(self.doc_file)[1][1:]
 
-		for page in self.pdf.pages:
-			print(page.keys())
+# 		for page in self.pdf.pages:
+# 			print(page.keys())
 
 
 	# @Base.run_in_subprocess

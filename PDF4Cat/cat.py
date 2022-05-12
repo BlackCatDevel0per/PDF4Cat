@@ -80,6 +80,7 @@ class Base:
 			self.progress_callback = self.pc
 
 		self.pdf_new = pikepdf.Pdf.new
+		self.pdf_image = pikepdf.PdfImage
 		self.pdf_open = pikepdf.Pdf.open
 
 	def pc(self, current, total) -> None:
