@@ -79,6 +79,9 @@ class Base:
 		if not progress_callback:
 			self.progress_callback = self.pc
 
+		self.pdf_new = pikepdf.Pdf.new
+		self.pdf_open = pikepdf.Pdf.open
+
 	def pc(self, current, total) -> None:
 		#
 		print(f'Progress: {current} of {total} complete', end="\r")
