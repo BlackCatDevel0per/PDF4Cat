@@ -6,13 +6,13 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 ## PDF:
 - [X] Merge
 - [X] Split
+- [X] Rotate
 - [ ] Edit Pages
 - [X] Delete Pages and save to pdf(from pdf)
 - [X] Extract Pages and save to pdf(from pdf)
 - [X] Protect (Encrypt)
 - [X] Unlock (Decrypt)
 - [X] Compress (Flate)
-- [X] Rotate
 
 ## Other things:
 - [ ] OCR pdf
