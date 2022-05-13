@@ -9,7 +9,7 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 - [ ] Edit Pages
 - [ ] Delete Pages
 - [ ] Extract Pages
-- [ ] Protect (Encrypt)
+- [X] Protect (Encrypt)
 - [X] Unlock (Decrypt)
 - [X] Compress (Flate)
 - [X] Rotate
