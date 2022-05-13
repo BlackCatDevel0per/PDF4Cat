@@ -5,7 +5,7 @@ from .cat import PDF4Cat
 class Tools(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Tools, self).__init__(*args, **kwargs)
-		self.pdf_ = self.pdf_open(self.doc_file)
+		self.pdf = self.pdf_open(self.doc_file)
 
 	@PDF4Cat.run_in_subprocess
 	def extract_pages2pdf(self, 
