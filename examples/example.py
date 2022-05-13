@@ -62,6 +62,12 @@ PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdf.zip')
 PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs.zip')
 # Convert pdf to images with select pages and compress to zip
 PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs10515.zip', pages=[10, 5, 15])
+
+# Extract pages and save to pdf
+PDF4Cat.Tools(filenames[0]).extract_pages2pdf('test_data/ep2pdf.pdf', [5, 15, 27])
+# Delete pages and save to pdf
+PDF4Cat.Tools(filenames[0]).delete_pages2pdf('test_data/ep2pdf.pdf', [0, 1, 5, 15, 27])
+
 c_time = time()
 print()
 print(int(c_time - s_time), "s.")

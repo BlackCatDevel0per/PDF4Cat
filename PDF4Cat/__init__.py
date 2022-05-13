@@ -25,5 +25,6 @@ from .crypt import Crypter
 from .effects import Effects
 from .compress import PdfOptimizer
 from .converter import Converter
+from .tools import Tools
 
 from .doc import Doc

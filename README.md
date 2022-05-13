@@ -7,8 +7,8 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 - [X] Merge
 - [X] Split
 - [ ] Edit Pages
-- [ ] Delete Pages
-- [ ] Extract Pages
+- [X] Delete Pages and save to pdf(from pdf)
+- [X] Extract Pages and save to pdf(from pdf)
 - [X] Protect (Encrypt)
 - [X] Unlock (Decrypt)
 - [X] Compress (Flate)
@@ -22,6 +22,5 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 - [ ] DOCX
 - [ ] EXCEL
 - [ ] POWER POINT
-- [ ] JPG
 - [ ] OPEN OFFICE
 

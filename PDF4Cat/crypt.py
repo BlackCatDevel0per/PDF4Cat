@@ -2,7 +2,7 @@ import os
 
 from .cat import PDF4Cat
 
-class Crypter(PDF4Cat): # Not work now..
+class Crypter(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Crypter, self).__init__(*args, **kwargs)
 		self.pdf = self.pdf_open(self.doc_file)

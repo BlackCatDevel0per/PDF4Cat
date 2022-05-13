@@ -72,7 +72,7 @@ class Pdf2Img(PDF4Cat):
 		self.pdf = self.pdf_open(self.doc_file)
 
 	# Generate name with BytesIO object (it is faster)
-	def _gen_imagesp2i(self, pages, fimages, start_from) -> tuple:
+	def gen_imagesp2i(self, pages, fimages, start_from) -> tuple:
 		ext_from_fimages = os.path.splitext(fimages)[1][1:]
 		zoom = 2 # to increase the resolution
 		mat = self.fitz_Matrix(zoom, zoom)
@@ -108,7 +108,7 @@ class Pdf2Img(PDF4Cat):
 		# Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
 		with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
 		
-			for file_name, io_data in self._gen_imagesp2i(pages, fimages, start_from):
+			for file_name, io_data in self.gen_imagesp2i(pages, fimages, start_from):
 				zf.writestr(file_name, io_data.getvalue())
 				self.counter += 1 #need enumerate
 				self.progress_callback(self.counter, pcount)
