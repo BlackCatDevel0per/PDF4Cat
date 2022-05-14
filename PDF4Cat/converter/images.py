@@ -8,7 +8,7 @@ class Img2Pdf(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Img2Pdf, self).__init__(*args, **kwargs)
 
-	# @PDF4Cat.run_in_subprocess
+	@PDF4Cat.run_in_subprocess
 	def img2pdf(self, 
 		output_pdf = None) -> None:
 		if not output_pdf:
