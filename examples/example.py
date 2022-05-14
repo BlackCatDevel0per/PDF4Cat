@@ -39,9 +39,9 @@ PDF4Cat.Doc(filenames[0]).split_pages2zip('test_data/splitted.zip', '{num}.pdf',
 # Rotate pdf Pages
 PDF4Cat.Doc(filenames[0]).rotate_doc_to(90, 'test_data/rotated.pdf')
 # Flate Compress pdf
-PDF4Cat.Doc(filenames[0]).ReFlate_to('test_data/re_flated.pdf')
+PDF4Cat.Doc(filenames[0]).DeFlate_to('test_data/re_flated.pdf')
 # or
-PDF4Cat.PdfOptimizer(filenames[0]).ReFlate_to('test_data/re_flated.pdf')
+PDF4Cat.PdfOptimizer(filenames[0]).DeFlate_to('test_data/re_flated.pdf')
 # Rotate pdf Pages
 PDF4Cat.Effects(filenames[0]).rotate_doc_to(180, 'test_data/rotated.pdf')
 # Convert image to pdf
