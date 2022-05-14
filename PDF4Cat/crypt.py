@@ -62,7 +62,6 @@ class Crypter(PDF4Cat):
 
 		pdf = self.pdf_open(self.doc_file)
 		# the document should be password protected
-		pdf.authenticate(self.passwd)
 		assert pdf.needsPass, "Document is not encrypted"
 
 		pdf.authenticate(self.passwd)
