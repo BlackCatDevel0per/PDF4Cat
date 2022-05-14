@@ -49,7 +49,7 @@ class PDF4Cat:
 
 		""" pikepdf methods """
 		self.pike_open = pikepdf.Pdf.open ###
-		self.pdf_new = pikepdf.Pdf.new
+		self.pdf_new = pikepdf.Pdf.new#############
 		self.pdfEncryption = pikepdf.Encryption
 		self.pdfPermissions = pikepdf.Permissions
 		
