@@ -21,7 +21,7 @@ class Crypter(PDF4Cat):
 				| PDF4Cat.PDF_PERM_ANNOTATE
 			)
 		"""
-		pdf = self.pdf_open(self.doc_file, passwd=self.passwd)
+		pdf = self.pdf_open(self.doc_file, self.passwd)
 
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
@@ -60,11 +60,11 @@ class Crypter(PDF4Cat):
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_pdf = os.path.join(os.getcwd(), output_pdf)
 
-		pdf = self.pdf_open(self.doc_file)
+		pdf = self.pdf_open(self.doc_file, self.passwd)
 		# the document should be password protected
-		assert pdf.needsPass, "Document is not encrypted"
+		assert pdf.needsPass
 
-		pdf.authenticate(self.passwd)
+		# pdf.authenticate(self.passwd)
 
 		pdf.save(output_pdf)
 
