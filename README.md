@@ -3,6 +3,7 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 
 # Planing add
 - [ ] CLI
+- [ ] Async work & optimizations
 ## PDF:
 - [X] Merge
 - [X] Split
