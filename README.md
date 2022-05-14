@@ -25,7 +25,7 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 - [ ] POWER POINT
 - [ ] OPEN OFFICE
 
-# Note: before use OCR run: 
+## Note: before use OCR run: 
 
 ### Install Tesseract.
 
