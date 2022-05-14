@@ -1,6 +1,5 @@
 import os
 import io
-from PIL import Image
 import zipfile
 
 from ..cat import PDF4Cat
