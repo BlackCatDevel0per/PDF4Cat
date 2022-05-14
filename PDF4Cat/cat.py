@@ -41,15 +41,16 @@ class PDF4Cat:
 		self.doc_filename = os.path.basename(doc_file)
 		self.doc_fileext = os.path.splitext(doc_file)[1]
 
+
 		""" PyMuPDF methods """
-		self.pdf_open = fitz.open
+		self.fitz_open = fitz.open
 		self.fitz_Pixmap = fitz.Pixmap
 		self.fitz_Matrix = fitz.Matrix
 
 
 		""" pikepdf methods """
-		self.pike_open = pikepdf.Pdf.open ###
-		self.pdf_new = pikepdf.Pdf.new#############
+		self.pike_open = pikepdf.Pdf.open
+		self.pike_new = pikepdf.Pdf.new
 		self.pdfEncryption = pikepdf.Encryption
 		self.pdfPermissions = pikepdf.Permissions
 		
@@ -69,7 +70,7 @@ class PDF4Cat:
 		# else:
 		# 	print(f'Progress: {current} of {total} complete')
 
-	@property
-	def pages_count(self) -> int:
-		return len(self.pdf.pages)
+	# @property
+	# def pages_count(self) -> int:
+	# 	return self.pdf.page_count
 

@@ -69,14 +69,14 @@ class Pdf2Img(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Pdf2Img, self).__init__(*args, **kwargs)
 		# self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
-		self.pdf = self.pdf_open(self.doc_file)
+		self.fitz_pdf = self.fitz_open(self.doc_file)
 
 	# Generate name with BytesIO object (it is faster)
 	def gen_imagesp2i(self, pages, fimages, start_from) -> tuple:
 		ext_from_fimages = os.path.splitext(fimages)[1][1:]
 		zoom = 2 # to increase the resolution
 		mat = self.fitz_Matrix(zoom, zoom)
-		noOfPages = range(self.pdf.pageCount)
+		noOfPages = range(self.fitz_pdf.pageCount)
 		if pages:
 			noOfPages = pages
 		for pageNo in noOfPages:
@@ -84,7 +84,7 @@ class Pdf2Img(PDF4Cat):
 				continue
 			io_data = io.BytesIO()
 			#
-			page = self.pdf.load_page(pageNo) #number of page
+			page = self.fitz_pdf.load_page(pageNo) #number of page
 			pix = page.get_pixmap(matrix = mat)
 			io_data.write(pix.tobytes(output=ext_from_fimages))
 			#
@@ -101,7 +101,7 @@ class Pdf2Img(PDF4Cat):
 		start_from: int = 0) -> None:
 		
 		if not pages:
-			pcount = self.pdf.pageCount
+			pcount = self.fitz_pdf.pageCount
 		else:
 			pcount = len(pages)
 

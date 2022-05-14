@@ -5,7 +5,6 @@ from .cat import PDF4Cat
 class Crypter(PDF4Cat):
 	def __init__(self, *args, **kwargs):
 		super(Crypter, self).__init__(*args, **kwargs)
-		self.pdf = self.pdf_open(self.doc_file)
 
 	@PDF4Cat.run_in_subprocess
 	def crypt_to(self, user_passwd: str = None, 
@@ -22,6 +21,7 @@ class Crypter(PDF4Cat):
 				| PDF4Cat.PDF_PERM_ANNOTATE
 			)
 		"""
+		fitz_pdf = self.fitz_open(self.doc_file)
 
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
@@ -44,7 +44,7 @@ class Crypter(PDF4Cat):
 				| PDF4Cat.PDF_PERM_ANNOTATE
 			)
 
-		self.pdf.save(
+		fitz_pdf.save(
 			output_pdf,
 			encryption=crypt_type,
 			owner_pw=owner_passwd,
@@ -58,11 +58,12 @@ class Crypter(PDF4Cat):
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 
+		fitz_pdf = self.fitz_open(self.doc_file)
 		# the document should be password protected
-		assert self.pdf.needsPass
+		assert fitz_pdf.needsPass
 
-		self.pdf.authenticate(self.passwd)
+		fitz_pdf.authenticate(self.passwd)
 
-		self.pdf.save(output_pdf)
+		fitz_pdf.save(output_pdf)
 
 

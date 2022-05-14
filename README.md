@@ -1,5 +1,5 @@
 # PDF4Cat
-PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
+PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF and pikepdf
 
 # Planing add
 - [ ] CLI
