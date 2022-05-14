@@ -14,6 +14,7 @@ class Img2Pdf(PDF4Cat):
 		output_pdf = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
+		output_pdf = os.path.join(os.getcwd(), output_pdf)
 
 		pic = self.fitz_open(self.doc_file)
 		pdf = self.fitz_open("pdf", pic.convert_to_pdf())
@@ -24,6 +25,7 @@ class Img2Pdf(PDF4Cat):
 		output_pdf = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
+		output_pdf = os.path.join(os.getcwd(), output_pdf)
 
 		len_docs = len(self.input_doc_list)
 
@@ -78,7 +80,7 @@ class Pdf2Img(PDF4Cat):
 		ext_from_fimages = os.path.splitext(fimages)[1][1:]
 		zoom = 2 # to increase the resolution
 		mat = self.fitz_Matrix(zoom, zoom)
-		noOfPages = range(self.fitz_pdf.pageCount)
+		noOfPages = range(self.fitz_pdf.page_count)
 		if pages:
 			noOfPages = pages
 		for pageNo in noOfPages:
@@ -103,7 +105,7 @@ class Pdf2Img(PDF4Cat):
 		start_from: int = 0) -> None:
 		
 		if not pages:
-			pcount = self.fitz_pdf.pageCount
+			pcount = self.fitz_pdf.page_count
 		else:
 			pcount = len(pages)
 

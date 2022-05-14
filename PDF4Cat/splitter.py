@@ -10,10 +10,10 @@ class Splitter(PDF4Cat):
 
 	# Generate name with BytesIO object (it is faster)
 	def gen_split(self, fpages, start_from) -> tuple:
-		pike_pdf = self.pike_open(self.doc_file)
-		for num, page in enumerate(pike_pdf.pages): ###
-			dst = self.pike_new()
-			dst.pages.append(page)
+		fitz_pdf = self.fitz_open(self.doc_file)
+		for num in range(fitz_pdf.page_count): ###
+			dst = self.fitz_open()
+			dst.insert_pdf(fitz_pdf, from_page=num, to_page=num)
 			io_data = io.BytesIO()
 			dst.save(io_data)
 			dst.close()
@@ -29,7 +29,7 @@ class Splitter(PDF4Cat):
 		out_zip_file: str, 
 		fpages: str = '{name}_{num}.pdf',
 		start_from: int = 0) -> None:
-		pike_pdf = self.pike_open(self.doc_file)
+		fitz_pdf = self.fitz_open(self.doc_file)
 
 		# Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
 		with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
@@ -37,7 +37,7 @@ class Splitter(PDF4Cat):
 			for file_name, io_data in self.gen_split(fpages, start_from):
 				zf.writestr(file_name, io_data.getvalue())
 				self.counter += 1 #need enumerate
-				self.progress_callback(self.counter, len(pike_pdf.pages))
+				self.progress_callback(self.counter, fitz_pdf.page_count)
 
 				del io_data
 

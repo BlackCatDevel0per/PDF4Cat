@@ -25,6 +25,7 @@ class Crypter(PDF4Cat):
 
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
+		output_pdf = os.path.join(os.getcwd(), output_pdf)
 
 
 		if not user_passwd:
@@ -57,6 +58,7 @@ class Crypter(PDF4Cat):
 		output_pdf = None) -> None:
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
+		output_pdf = os.path.join(os.getcwd(), output_pdf)
 
 		fitz_pdf = self.fitz_open(self.doc_file)
 		# the document should be password protected
