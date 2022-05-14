@@ -68,6 +68,9 @@ PDF4Cat.Tools(filenames[0]).extract_pages2pdf('test_data/ep2pdf.pdf', [5, 15, 27
 # Delete pages and save to pdf
 PDF4Cat.Tools(filenames[0]).delete_pages2pdf('test_data/ep2pdf.pdf', [0, 1, 5, 15, 27])
 
+# OCR pdf
+PDF4Cat.Converter('test_data/img2pdf.pdf').pdfocr("rus", 'test_data/pdfocr.pdf')
+
 c_time = time()
 print()
 print(int(c_time - s_time), "s.")
