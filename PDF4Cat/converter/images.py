@@ -15,8 +15,9 @@ class Img2Pdf(PDF4Cat):
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 
-		pix = self.fitz_Pixmap(self.doc_file)
-		pix.save(output_pdf)
+		pic = self.fitz_open(self.doc_file)
+		pdf = self.fitz_open("pdf", pic.convert_to_pdf())
+		pdf.save(output_pdf)
 
 	@PDF4Cat.run_in_subprocess
 	def imgs2pdf(self, 
@@ -24,24 +25,25 @@ class Img2Pdf(PDF4Cat):
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 
-		input_imgs_list = []
 		len_docs = len(self.input_doc_list)
 
+		result = self.fitz_open()
 		for img_path in self.input_doc_list:
-			input_imgs_list.append(Image.open(img_path).convert('RGB'))
+			pic = self.fitz_open(self.doc_file)
+			pdf = self.fitz_open("pdf", pic.convert_to_pdf())
+			result.insert_pdf(pdf)
 			self.counter += 1
 			self.progress_callback(self.counter, len_docs)
-
-		input_imgs_list[0].save(output_pdf, 
-			save_all=True, 
-			append_images=input_imgs_list[1:]) # No format
+		result.save(output_pdf)
 
 	# Generate name with BytesIO object (it is faster)
 	def gen_imagesi2p(self, fimages, start_from) -> tuple:
 		for num, img in enumerate(self.input_doc_list): ###
 			io_data = io.BytesIO()
 			img_ext = os.path.splitext(img)[1][1:]
-			Image.open(img).convert('RGB').save(io_data, format=img_ext)
+			pic = self.fitz_open(img)
+			pdf = self.fitz_open("pdf", pic.convert_to_pdf())
+			pdf.save(io_data)
 
 			imfn = fimages.format(name=os.path.basename(img), num=num+start_from)
 			imfi = io_data

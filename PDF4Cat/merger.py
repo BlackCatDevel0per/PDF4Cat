@@ -32,7 +32,11 @@ class Merger(PDF4Cat):
 		output_pdf = os.path.join(os.getcwd(), output_pdf)
 
 		result = self.fitz_open()
+		len_idl = len(self.input_doc_list)
 		for pdf in self.input_doc_list:
 			with self.fitz_open(pdf) as f:
 				result.insert_pdf(f)
+			self.counter += 1
+			self.progress_callback(self.counter, len_idl)
+		self.counter = 0
 		result.save(output_pdf)
