@@ -61,6 +61,7 @@ class Crypter(PDF4Cat):
 		output_pdf = os.path.join(os.getcwd(), output_pdf)
 
 		pdf = self.pdf_open(self.doc_file)
+		# pdf = self.pdf_open(self.doc_file, passwd=self.passwd) # bug, saves blank(white pages) doc
 		# the document should be password protected
 		assert pdf.needsPass, "Document is not encrypted"
 
