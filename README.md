@@ -16,7 +16,7 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 - [X] Compress (Flate)
 
 ## Other things:
-- [ ] OCR pdf
+- [X] OCR pdf
 - [X] Pdf to Images
 - [X] Images to pdf
 ### Add actions with docs:
