@@ -16,8 +16,10 @@ class Img2Pdf(PDF4Cat):
 		output_pdf = os.path.join(os.getcwd(), output_pdf)
 
 		pic = self.pdf_open(self.doc_file, passwd=self.passwd)
-		pdf = self.pdf_open("pdf", stream=pic.convert_to_pdf())
-		pdf.save(output_pdf)
+		pdfbytes = pic.convert_to_pdf()
+		with open(output_pdf, 'wb') as pdf:
+			pdf.write(pdfbytes)
+		del pdfbytes
 
 	@PDF4Cat.run_in_subprocess
 	def imgs2pdf(self, 
@@ -31,8 +33,13 @@ class Img2Pdf(PDF4Cat):
 		result = self.pdf_open()
 		for img_path in self.input_doc_list:
 			pic = self.pdf_open(self.doc_file, passwd=self.passwd)
-			pdf = self.pdf_open("pdf", stream=pic.convert_to_pdf())
-			result.insert_pdf(pdf)
+			pdfbytes = pic.convert_to_pdf()
+			pdf_tmp = self.pdf_open("pdf", pdfbytes)
+			pic.close()
+			del pdfbytes
+			result.insert_pdf(pdf_tmp)
+			pdf_tmp.close()
+			del pdf_tmp
 			self.counter += 1
 			self.progress_callback(self.counter, len_docs)
 		result.save(output_pdf)
@@ -43,11 +50,14 @@ class Img2Pdf(PDF4Cat):
 			io_data = io.BytesIO()
 			img_ext = os.path.splitext(img)[1][1:]
 			pic = self.pdf_open(img)
-			pdf = self.pdf_open("pdf", stream=pic.convert_to_pdf())
-			pdf.save(io_data)
+			pdfbytes = pic.convert_to_pdf()
+			pic.close()
+			del pic
+			io_data.write(pdfbytes)
+			del pdfbytes
 
 			imfn = fimages.format(name=os.path.basename(img), num=num+start_from)
-			imfi = io_data
+			imfi = io_data.getvalue()
 			yield imfn, imfi
 
 	@PDF4Cat.run_in_subprocess
@@ -60,7 +70,7 @@ class Img2Pdf(PDF4Cat):
 		with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
 
 			for file_name, io_data in self.gen_imagesi2p(fimages, start_from):
-				zf.writestr(file_name, io_data.getvalue())
+				zf.writestr(file_name, io_data)
 				self.counter += 1 #need enumerate
 				self.progress_callback(self.counter, len(self.input_doc_list))
 

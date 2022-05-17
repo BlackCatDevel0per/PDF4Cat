@@ -43,6 +43,8 @@ class PDF4Cat:
 
 		""" PyMuPDF methods """
 		self.fitz_Matrix = fitz.Matrix
+		self.fitz_get_pdf_now = fitz.get_pdf_now
+		self.fitz_LINK_NAMED = fitz.LINK_NAMED
 		
 		self.passwd = passwd
 

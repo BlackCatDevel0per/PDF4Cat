@@ -6,6 +6,7 @@ build/
 dist/
 git_push.sh
 twine.sh
+go.py
 *.egg-info
 test.py
 *.sqlite3-journal
