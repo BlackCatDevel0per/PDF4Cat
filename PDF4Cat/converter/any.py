@@ -125,8 +125,8 @@ class any_doc_convert(PDF4Cat):
 
 		self.docx2html(html_tmp, run_in_subprocess=False)
 		doc = self.pdf_open(filename="html", stream=html_tmp)
-		pdfbytes = doc.convert_to_pdf(0, 1)
-		# doc.close()
+		pdfbytes = doc.convert_to_pdf() # need convert to image..?
+		doc.close()
 		with open(output_pdf, 'wb') as output:
 			output.write(pdfbytes)
 		# pdf = self.pdf_open("pdf", pdfbytes)
