@@ -20,8 +20,8 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 - [X] Pdf to Images
 - [X] Images to pdf
 ### Add actions with docs:
-- [ ] DOCX
-- [ ] POWER POINT
+- [X] DOCX
+- [X] POWER POINT
 - [ ] OPEN OFFICE DOCS
 
 ## Note: before use OCR run: 

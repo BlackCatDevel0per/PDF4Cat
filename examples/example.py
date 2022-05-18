@@ -63,8 +63,10 @@ PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs.zip')
 # Convert pdf to images with select pages and compress to zip
 PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs10515.zip', pages=[10, 5, 15])
 
-# Convert pdf to docx (image)
+# Convert pdf to docx (images)
 PDF4Cat.Converter(filenames[0]).pdf2docx("test_data/pdf2docx.docx")
+# Convert pdf to pptx (images)
+PDF4Cat.Converter(filenames[0]).pdf2pptx("test_data/pdf2docx.pptx")
 # Convert docx to html
 PDF4Cat.Converter('test_data/pdf2docx.docx').docx2html("test_data/docx2html.html")
 

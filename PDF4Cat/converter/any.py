@@ -1,9 +1,15 @@
 import os
 import io
-
+# docx
 from docx import Document
 from docx.shared import Inches
 
+# pptx
+import collections 
+import collections.abc
+from pptx import Presentation
+from pptx.util import Inches
+# docx2html or docx2md
 from mammoth import convert as mammoth_convert
 
 from ..cat import PDF4Cat
@@ -71,6 +77,27 @@ class any_doc_convert(PDF4Cat):
 			yield imfi
 
 	@PDF4Cat.run_in_subprocess
+	def pdf2pptx(self, output_pptx):
+		if not output_pptx:
+			output_pptx = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
+		output_pptx = os.path.join(os.getcwd(), output_pptx)
+
+		pdf = self.pdf_open(self.doc_file, passwd=self.passwd)
+		prs = Presentation()
+		blank_slide_layout = prs.slide_layouts[6] 
+
+		for io_data in self.gen_images4conv(pdf):
+			slide = prs.slides.add_slide(blank_slide_layout)
+			# slide.shapes.add_picture(io_data, 0, 0, width=Inches(13.333), height=Inches(7.5))
+			slide.shapes.add_picture(io_data, 0, 0, width=Inches(13.333), height=Inches(7.5))
+			del io_data
+			self.counter += 1 #need enumerate
+			self.progress_callback(self.counter, pdf.page_count)
+
+		prs.save(output_pptx)
+		self.counter = 0
+
+	@PDF4Cat.run_in_subprocess
 	def pdf2docx(self, output_docx):
 		if not output_docx:
 			output_docx = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
@@ -80,7 +107,8 @@ class any_doc_convert(PDF4Cat):
 		document = Document()
 
 		for io_data in self.gen_images4conv(pdf):
-			document.add_picture(io_data, width=Inches(8.5), height=Inches(11))
+			# document.add_picture(io_data, width=Inches(8.5), height=Inches(11))
+			document.add_picture(io_data, width=Inches(5.7), height=Inches(9)) # 5.75
 			del io_data
 			self.counter += 1 #need enumerate
 			self.progress_callback(self.counter, pdf.page_count)
