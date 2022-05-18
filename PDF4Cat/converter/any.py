@@ -71,7 +71,7 @@ class any_doc_convert(PDF4Cat):
 			yield imfi
 
 	@PDF4Cat.run_in_subprocess
-	def pdf2docx(self, output_docx, width: int = 6.5):
+	def pdf2docx(self, output_docx):
 		if not output_docx:
 			output_docx = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_docx = os.path.join(os.getcwd(), output_docx)
@@ -80,7 +80,7 @@ class any_doc_convert(PDF4Cat):
 		document = Document()
 
 		for io_data in self.gen_images4conv(pdf):
-			document.add_picture(io_data, width=Inches(width))
+			document.add_picture(io_data, width=Inches(8.5), height=Inches(11))
 			del io_data
 			self.counter += 1 #need enumerate
 			self.progress_callback(self.counter, pdf.page_count)
