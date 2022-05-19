@@ -20,14 +20,23 @@ class any_doc_convert(PDF4Cat):
 
 	@PDF4Cat.run_in_subprocess
 	def convert2pdf(self, output_pdf): # only for text based pdf and works not for all
+		if isinstance(output_pdf, str):
+			ext = os.path.splitext(self.doc_filename)[1][1:]
+			if ext == 'docx' or ext == 'doc':
+				self.docx2pdf(output_pdf)
+				return
+			# elif ext == 'pptx' or ext == 'ppt':
+			# 	self.pptx2pdf(output_pdf)
+			# 	return
+		
 		doc = self.pdf_open(self.doc_file)
 
 		b = doc.convert_to_pdf()  # convert to pdf
 		pdf = self.pdf_open("pdf", b)  # open as pdf
 
 		# ***
-		toc = doc.het_toc()  # table of contents of input
-		pdf.set_toc(toc)  # simply set it for output
+		# toc = doc.het_toc()  # table of contents of input
+		# pdf.set_toc(toc)  # simply set it for output
 		meta = doc.metadata  # read and set metadata
 		if not meta["producer"]:
 			meta["producer"] = "PDF4Cat https://github.com/BlackCatDevel0per/PDF4Cat"
