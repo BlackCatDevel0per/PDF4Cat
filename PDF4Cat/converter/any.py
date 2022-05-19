@@ -77,19 +77,25 @@ class any_doc_convert(PDF4Cat):
 			yield imfi
 
 	@PDF4Cat.run_in_subprocess
-	def pdf2pptx(self, output_pptx):
+	def pdf2pptx(self, output_pptx, A4=True):
 		if not output_pptx:
 			output_pptx = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_pptx = os.path.join(os.getcwd(), output_pptx)
 
 		pdf = self.pdf_open(self.doc_file, passwd=self.passwd)
 		prs = Presentation()
-		blank_slide_layout = prs.slide_layouts[6] 
+		w, h = 13.333, 7.5
+		if A4:
+			prs.slide_height=Inches(11)
+			prs.slide_width=Inches(8.5)
+			w, h = 8.5, 11
+
+		blank_slide_layout = prs.slide_layouts[6]
 
 		for io_data in self.gen_images4conv(pdf):
 			slide = prs.slides.add_slide(blank_slide_layout)
 			# slide.shapes.add_picture(io_data, 0, 0, width=Inches(13.333), height=Inches(7.5))
-			slide.shapes.add_picture(io_data, 0, 0, width=Inches(13.333), height=Inches(7.5))
+			slide.shapes.add_picture(io_data, 0, 0, width=Inches(w), height=Inches(h))
 			del io_data
 			self.counter += 1 #need enumerate
 			self.progress_callback(self.counter, pdf.page_count)
