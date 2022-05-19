@@ -66,7 +66,7 @@ PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs10515.zip', page
 # Convert pdf to docx (images)
 PDF4Cat.Converter(filenames[0]).pdf2docx("test_data/pdf2docx.docx")
 # Convert pdf to pptx (images)
-PDF4Cat.Converter(filenames[0]).pdf2pptx("test_data/pdf2docx.pptx")
+PDF4Cat.Converter(filenames[0]).pdf2pptx("test_data/pdf2pptx.pptx")
 # Convert docx to html
 PDF4Cat.Converter('test_data/pdf2docx.docx').docx2html("test_data/docx2html.html")
 
