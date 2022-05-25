@@ -40,6 +40,16 @@ class PDF4Cat:
 		self.doc_filename = os.path.basename(doc_file)
 		self.doc_fileext = os.path.splitext(doc_file)[1]
 
+		self.libre_exts = [
+		".doc", ".odt", ".ott", 
+		".docx", ".fodp", ".dotx",
+		".csv", ".otp", ".ods",
+		".odp", ".odf", ".otg",
+		".xls", ".xlsx", ".ppt", 
+		".pptx", ".txt", ".xml",
+		".epub"
+		]
+
 
 		""" PyMuPDF methods """
 		self.fitz_Matrix = fitz.Matrix

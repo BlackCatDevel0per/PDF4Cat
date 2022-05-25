@@ -19,12 +19,17 @@ class any_doc_convert(PDF4Cat):
 		super(any_doc_convert, self).__init__(*args, **kwargs)
 
 	@PDF4Cat.run_in_subprocess
-	def convert2pdf(self, output_pdf): # only for text based pdf and works not for all
+	def convert2pdf(self, output_pdf, use_soffice=False): # only for text based pdf and works not for all
 		if isinstance(output_pdf, str):
 			ext = os.path.splitext(self.doc_filename)[1][1:]
-			if ext == 'docx' or ext == 'doc':
+			if ext in ['docx', 'doc'] and not use_soffice:
 				self.docx2pdf(output_pdf)
 				return
+			elif "."+ext in self.libre_exts and use_soffice:
+				self.soffice_convert2pdf(output_pdf)
+				return
+			else:
+				raise NotImplementedError(f"File extension '{self.doc_fileext}' => '.pdf' not supported")
 			# elif ext == 'pptx' or ext == 'ppt':
 			# 	self.pptx2pdf(output_pdf)
 			# 	return
@@ -37,15 +42,15 @@ class any_doc_convert(PDF4Cat):
 		# ***
 		# toc = doc.het_toc()  # table of contents of input
 		# pdf.set_toc(toc)  # simply set it for output
-		meta = doc.metadata  # read and set metadata
-		if not meta["producer"]:
-			meta["producer"] = "PDF4Cat https://github.com/BlackCatDevel0per/PDF4Cat"
+		# meta = doc.metadata  # read and set metadata
+		# if not meta["producer"]:
+		# 	meta["producer"] = "PDF4Cat https://github.com/BlackCatDevel0per/PDF4Cat"
 
-		if not meta["creator"]:
-			meta["creator"] = "PDF4Cat pdf tool"
-		meta["modDate"] = self.fitz_get_pdf_now()
-		meta["creationDate"] = meta["modDate"]
-		pdf.set_metadata(meta)
+		# if not meta["creator"]:
+		# 	meta["creator"] = "PDF4Cat pdf tool"
+		# meta["modDate"] = self.fitz_get_pdf_now()
+		# meta["creationDate"] = meta["modDate"]
+		# pdf.set_metadata(meta)
 		# ***
 
 		# now process the links

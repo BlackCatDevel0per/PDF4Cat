@@ -53,6 +53,23 @@ PDF4Cat.Converter('test_data/pdf2docx.docx').docx2html("test_data/docx2html.html
 # Convert html to pdf
 PDF4Cat.Converter('test_data/docx2html.html').convert2pdf('test_data/html_convert2pdf.pdf')
 
+# Convert:
+# [
+# ".doc", ".odt", ".ott", 
+# ".docx", ".fodp", ".dotx",
+# ".csv", ".otp", ".ods",
+# ".odp", ".odf", ".otg",
+# ".xls", ".xlsx", ".ppt", 
+# ".pptx", ".txt", ".xml",
+# "epub"
+# ]
+# to pdf by libre-office (need installed)
+# PDF4Cat.Converter('doc_name_or_path').soffice_convert2pdf('save_file_to.pdf')
+PDF4Cat.Converter('test_data/pdf2docx.docx').soffice_convert2pdf("test_data/soffice_docx2pdf.pdf")
+# in convert2pdf by param use_soffice=True
+PDF4Cat.Converter('test_data/pdf2docx.docx').convert2pdf('test_data/docx_convert2pdf.pdf', use_soffice=True)
+# and other soffice convert:
+PDF4Cat.Converter('test_data/test.xlsx').soffice_convert_to("pdf", "test_data/soffice_xlsx2pdf.pdf")
 # Convert image to pdf
 PDF4Cat.Converter('test_data/test.png').img2pdf('test_data/img2pdf.pdf')
 PDF4Cat.Converter('test_data/test.png').convert2pdf('test_data/img2pdf.pdf')
@@ -78,7 +95,7 @@ PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs10515.zip', page
 # Extract pages and save to pdf
 PDF4Cat.Tools(filenames[0]).extract_pages2pdf('test_data/ep2pdf.pdf', [5, 15, 27])
 # Delete pages and save to pdf
-PDF4Cat.Tools(filenames[0]).delete_pages2pdf('test_data/ep2pdf.pdf', [0, 1, 5, 15, 27])
+PDF4Cat.Tools(filenames[0]).delete_pages2pdf('test_data/dp2pdf.pdf', [0, 1, 5, 15, 27])
 
 # OCR pdf
 PDF4Cat.Converter('test_data/img2pdf.pdf').pdfocr("rus", 'test_data/pdfocr.pdf')

@@ -22,7 +22,7 @@ PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
 ### Add actions with docs:
 - [X] DOCX
 - [X] POWER POINT
-- [ ] OPEN OFFICE DOCS
+- [X] OPEN OFFICE DOCS
 
 ## Note: before use OCR run: 
 
