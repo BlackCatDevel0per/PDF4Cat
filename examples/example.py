@@ -70,6 +70,8 @@ PDF4Cat.Converter('test_data/pdf2docx.docx').soffice_convert2pdf("test_data/soff
 PDF4Cat.Converter('test_data/pdf2docx.docx').convert2pdf('test_data/docx_convert2pdf.pdf', use_soffice=True)
 # and other soffice convert:
 PDF4Cat.Converter('test_data/test.xlsx').soffice_convert_to("pdf", "test_data/soffice_xlsx2pdf.pdf")
+# Convert pdf to pdf/a v. 1 or 2
+PDF4Cat.Converter('test_data/pdf2docx.docx').soffice_convert2pdf_a(1, "test_data/soffice_pdf2pdf_a_v1.pdf")
 # Convert image to pdf
 PDF4Cat.Converter('test_data/test.png').img2pdf('test_data/img2pdf.pdf')
 PDF4Cat.Converter('test_data/test.png').convert2pdf('test_data/img2pdf.pdf')
