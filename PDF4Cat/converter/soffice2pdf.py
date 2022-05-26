@@ -24,7 +24,9 @@ class soffice_convert(PDF4Cat):
 		else:
 			raise NotImplementedError(f"File extension '{self.doc_fileext}' => '.pdf' not supported")
 
-	def soffice_convert2pdf_a(self, a: int = 1, output_pdf: str):
+	def soffice_convert2pdf_a(self, a: int, output_pdf: str):
+		if not a:
+			a = 1
 		# soffice --headless --convert-to pdf:"writer_pdf_Export:SelectPdfVersion=1" --outdir outdir input.pdf
 		if self.doc_fileext in self.libre_exts:
 			temp_pdf = os.path.join(tempfile.gettempdir(), f"""{self.doc_name}.pdf""")
