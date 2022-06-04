@@ -1,6 +1,8 @@
 # PDF4Cat
 PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF 
 
+[![Documentation Status](https://readthedocs.org/projects/pdf4cat/badge/?version=latest)](https://pdf4cat.readthedocs.io/en/latest/?badge=latest)
+
 [Docs](https://pdf4cat.readthedocs.io)
 
 # Planing add
