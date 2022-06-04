@@ -5,4 +5,5 @@ PDF4Cat module
    :maxdepth: 4
 
    PDF4Cat.Converter
-   PDF4Cat.effects
+   PDF4Cat.doc
+   PDF4Cat.helpers
