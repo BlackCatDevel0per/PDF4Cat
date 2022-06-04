@@ -1,5 +1,7 @@
 # PDF4Cat
-PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF
+PDF4Cat Simple and Power tool for processing pdf docs using PyMuPDF 
+
+[Docs](https://pdf4cat.readthedocs.io)
 
 # Planing add
 - [ ] CLI
