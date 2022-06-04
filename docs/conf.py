@@ -12,15 +12,15 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('..'))
 
 import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
 project = 'PDF4Cat'
-copyright = '2022, bcdev'
-author = 'bcdev'
+copyright = '2022, blackcatdev'
+author = 'blackcatdev'
 
 # The full version, including alpha/beta/rc tags
 release = '0.4.2'

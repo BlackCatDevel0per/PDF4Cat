@@ -6,12 +6,10 @@
 Welcome to PDF4Cat's documentation!
 ===================================
 
-.. automodule:: PDF4Cat.Converter
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. toctree::
+   :maxdepth: 4
 
-
+   PDF4Cat
 
 Indices and tables
 ==================
