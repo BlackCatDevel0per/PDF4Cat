@@ -7,7 +7,12 @@ class PdfOptimizer(PDF4Cat):
 		super(PdfOptimizer, self).__init__(*args, **kwargs)
 		
 	@PDF4Cat.run_in_subprocess
-	def DeFlate_to(self, output_pdf = None):
+	def DeFlate_to(self, output_pdf = None) -> None:
+		"""Deflate pdf to file
+		
+		Args:
+			output_pdf (None, optional): Output pdf file
+		"""
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 

@@ -5,4 +5,5 @@ from .soffice2pdf import *
 
 class Converter(Img2Pdf, Pdf2Img, OCR, any_doc_convert, soffice_convert):
 	def __init__(self, *args, **kwargs):
+		"""Parent class of PDF4Cat.converter submodule"""
 		super(Converter, self).__init__(*args, **kwargs)

@@ -5,12 +5,30 @@ import zipfile
 from ..cat import PDF4Cat
 
 class Img2Pdf(PDF4Cat):
+
+	"""Subclass of PDF4Cat parent class
+	
+	Args:
+		doc_file (None, optional): Document file (for multiple operations, 'use input_doc_list')
+		input_doc_list (list, optional): List of input docs
+		passwd (str, optional): Document password (for crypt/decrypt)
+		progress_callback (None, optional): Progress callback like:
+	
+	Raises:
+		TypeError: If you use doc_file with input_doc_list (you can use only one)
+	"""
+	
 	def __init__(self, *args, **kwargs):
 		super(Img2Pdf, self).__init__(*args, **kwargs)
 
 	@PDF4Cat.run_in_subprocess
 	def img2pdf(self, 
 		output_pdf = None) -> None:
+		"""Image to pdf
+		
+		Args:
+			output_pdf (None, optional): Output pdf file
+		"""
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_pdf = os.path.join(os.getcwd(), output_pdf)
@@ -24,6 +42,11 @@ class Img2Pdf(PDF4Cat):
 	@PDF4Cat.run_in_subprocess
 	def imgs2pdf(self, 
 		output_pdf = None) -> None:
+		"""Multiple images to pdf
+		
+		Args:
+			output_pdf (None, optional): Output pdf file
+		"""
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_pdf = os.path.join(os.getcwd(), output_pdf)
@@ -44,8 +67,19 @@ class Img2Pdf(PDF4Cat):
 			self.progress_callback(self.counter, len_docs)
 		result.save(output_pdf)
 
-	# Generate name with BytesIO object (it is faster)
-	def gen_imagesi2p(self, fimages, start_from) -> tuple:
+	# (it is faster)
+	def gen_imagesi2p(self, 
+		fimages: str = '{name}_{num}.pdf', 
+		start_from: int = 0) -> tuple:
+		"""Generator, generate name with BytesIO object
+		
+		Args:
+			fimages (str, optional): Format image filename
+			start_from (int, optional): Enumerate from n
+		
+		Yields:
+			tuple: filename, BytesIO
+		"""
 		for num, img in enumerate(self.input_doc_list): ###
 			io_data = io.BytesIO()
 			img_ext = os.path.splitext(img)[1][1:]
@@ -65,7 +99,14 @@ class Img2Pdf(PDF4Cat):
 		out_zip_file: str, 
 		fimages: str = '{name}_{num}.pdf',
 		start_from: int = 0) -> None:
-
+		"""Multiple images to multiple pdfs and compress to zip
+		(using gen_imagesi2p generator)
+		
+		Args:
+			out_zip_file (str): Output zip file
+			fimages (str, optional): Format image filename
+			start_from (int, optional): Enumerate from n
+		"""
 		# Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
 		with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
 
@@ -79,12 +120,39 @@ class Img2Pdf(PDF4Cat):
 #
 
 class Pdf2Img(PDF4Cat):
+
+	"""Subclass of PDF4Cat parent class
+	
+	Args:
+		doc_file (None, optional): Document file (for multiple operations, 'use input_doc_list')
+		input_doc_list (list, optional): List of input docs
+		passwd (str, optional): Document password (for crypt/decrypt)
+		progress_callback (None, optional): Progress callback like:
+	
+	Raises:
+		TypeError: If you use doc_file with input_doc_list (you can use only one)
+	"""
+	
 	def __init__(self, *args, **kwargs):
 		super(Pdf2Img, self).__init__(*args, **kwargs)
 		# self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
 
-	# Generate name with BytesIO object (it is faster)
-	def gen_imagesp2i(self, pages, fimages, start_from, zoom) -> tuple:
+	# (it is faster)
+	def gen_imagesp2i(self, pages: list = [], 
+		fimages: str = '{name}_{num}.png', 
+		start_from: int = 0, 
+		zoom: float = 1.5) -> tuple:
+		"""Generator, generate name with BytesIO object
+		
+		Args:
+			pages (list, optional): List of pages to filter like [1, 3, 5, 15]
+			fimages (str, optional): Format image filename
+			start_from (int, optional): Enumerate from n
+			zoom (float, optional): Zoom image (look fitz.Matrix docs)
+		
+		Yields:
+			tuple: filename, BytesIO
+		"""
 		pdf = self.pdf_open(self.doc_file, passwd=self.passwd)
 		ext_from_fimages = os.path.splitext(fimages)[1][1:]
 		mat = self.fitz_Matrix(zoom, zoom)
@@ -112,7 +180,16 @@ class Pdf2Img(PDF4Cat):
 		fimages: str = '{name}_{num}.png',
 		start_from: int = 0,
 		zoom: float = 1.5) -> None:
+		"""Multiple pdfs to multiple images and compress to zip
+		(using gen_imagesp2i generator)
 		
+		Args:
+			out_zip_file (str): Output zip file
+			pages (list, optional): List of pages to filter like [1, 3, 5, 15]
+			fimages (str, optional): Format image filename
+			start_from (int, optional): Enumerate from n
+			zoom (float, optional): Zoom image (look fitz.Matrix docs)
+		"""
 		pdf = self.pdf_open(self.doc_file, passwd=self.passwd)
 		if not pages:
 			pcount = pdf.page_count

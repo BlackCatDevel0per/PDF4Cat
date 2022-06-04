@@ -4,11 +4,36 @@ import io
 from ..cat import PDF4Cat
 
 class OCR(PDF4Cat):
+
+	"""Subclass of PDF4Cat parent class
+	
+	Args:
+		doc_file (None, optional): Document file (for multiple operations, 'use input_doc_list')
+		input_doc_list (list, optional): List of input docs
+		passwd (str, optional): Document password (for crypt/decrypt)
+		progress_callback (None, optional): Progress callback like:
+	
+	Raises:
+		TypeError: If you use doc_file with input_doc_list (you can use only one)
+	"""
+	
 	def __init__(self, *args, **kwargs):
 		super(OCR, self).__init__(*args, **kwargs)
 
-	# Generate name with BytesIO object (it is faster)
-	def gen_pdfImagesOCR(self, pages, language, zoom) -> tuple:
+	# (it is faster)
+	def gen_pdfImagesOCR(self, pages: list = [], 
+		language: str = 'eng', 
+		zoom: float = 1.5) -> tuple:
+		"""Generator, generate BytesIO object
+		
+		Args:
+			pages (list, optional): List of pages to filter like [1, 3, 5, 15]
+			language (str, optional): Language to ocr (look fitz.pdfocr_tobytes)
+			zoom (float, optional): Zoom image (look fitz.Matrix docs)
+		
+		Yields:
+			tuple: BytesIO
+		"""
 		pdf = self.pdf_open(self.doc_file, passwd=self.passwd)
 		mat = self.fitz_Matrix(zoom, zoom)
 		noOfPages = range(pdf.page_count)
@@ -28,12 +53,20 @@ class OCR(PDF4Cat):
 
 	@PDF4Cat.run_in_subprocess
 	def pdfocr(self, 
-		language: str = "eng",
+		language: str = 'eng',
 		output_pdf = None,
 		pages: list = [],
 		start_from: int = 0,
 		zoom: float = 1.5) -> None:
-
+		"""OCR pdf to file
+		
+		Args:
+			language (str, optional): Language to ocr (look fitz.pdfocr_tobytes)
+			output_pdf (None, optional): Output pdf file
+			pages (list, optional): List of pages to filter like [1, 3, 5, 15]
+			start_from (int, optional): Enumerate from n
+			zoom (float, optional): Zoom image (look fitz.Matrix docs)
+		"""
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_pdf = os.path.join(os.getcwd(), output_pdf) #doc.insert_pdf(imgpdf)
