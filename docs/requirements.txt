@@ -1,1 +1,1 @@
-pymupdf==1.19.6
+PyMuPDF==1.19.6
