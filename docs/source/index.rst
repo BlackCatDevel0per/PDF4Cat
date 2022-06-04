@@ -6,11 +6,10 @@
 Welcome to PDF4Cat's documentation!
 ===================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-   
-   modules
+.. automodule:: PDF4Cat.Converter
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 
