@@ -91,16 +91,16 @@ class PDF4Cat:
 		if not progress_callback:
 			self.progress_callback = self.pc
 
-	def pdf_open(self, filename: str = None, stream: bytes = None, passwd: str = ''):
+	def pdf_open(self, filename: str = None, stream: bytes = None, passwd: str = '') -> object:
 		"""Open pdf file
 		
 		Args:
-			filename (str, optional): Description
-			stream (bytes, optional): Description
-			passwd (str, optional): Description
+			filename (str, optional): Name of file
+			stream (bytes, optional): Bytes like object
+			passwd (str, optional): Password if encrypted
 		
 		Returns:
-			TYPE: Description
+			object: fitz.fitz.Document
 		"""
 		fo = fitz.open(filename, stream)
 		if fo.needsPass:

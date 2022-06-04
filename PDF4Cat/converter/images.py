@@ -74,7 +74,7 @@ class Img2Pdf(PDF4Cat):
 		"""Generator, generate name with BytesIO object
 		
 		Args:
-			fimages (str, optional): Format image filename
+			fimages (str, optional): Format image filenames
 			start_from (int, optional): Enumerate from n
 		
 		Yields:
@@ -104,7 +104,7 @@ class Img2Pdf(PDF4Cat):
 		
 		Args:
 			out_zip_file (str): Output zip file
-			fimages (str, optional): Format image filename
+			fimages (str, optional): Format image filenames
 			start_from (int, optional): Enumerate from n
 		"""
 		# Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
@@ -132,7 +132,7 @@ class Pdf2Img(PDF4Cat):
 	Raises:
 		TypeError: If you use doc_file with input_doc_list (you can use only one)
 	"""
-	
+
 	def __init__(self, *args, **kwargs):
 		super(Pdf2Img, self).__init__(*args, **kwargs)
 		# self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
@@ -145,8 +145,8 @@ class Pdf2Img(PDF4Cat):
 		"""Generator, generate name with BytesIO object
 		
 		Args:
-			pages (list, optional): List of pages to filter like [1, 3, 5, 15]
-			fimages (str, optional): Format image filename
+			pages (list, optional): List of pages to select like [1, 3, 5, 15]
+			fimages (str, optional): Format image filenames
 			start_from (int, optional): Enumerate from n
 			zoom (float, optional): Zoom image (look fitz.Matrix docs)
 		
@@ -185,8 +185,8 @@ class Pdf2Img(PDF4Cat):
 		
 		Args:
 			out_zip_file (str): Output zip file
-			pages (list, optional): List of pages to filter like [1, 3, 5, 15]
-			fimages (str, optional): Format image filename
+			pages (list, optional): List of pages to select like [1, 3, 5, 15]
+			fimages (str, optional): Format image filenames
 			start_from (int, optional): Enumerate from n
 			zoom (float, optional): Zoom image (look fitz.Matrix docs)
 		"""

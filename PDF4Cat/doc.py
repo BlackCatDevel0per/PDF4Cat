@@ -6,6 +6,7 @@ from .compress import PdfOptimizer
 # from .tools import Tools
 
 class Doc(Merger, Splitter, Crypter, Effects, PdfOptimizer):
+	"""Parent class of PDF4Cat.doc submodule"""
 	def __init__(self, *args, **kwargs):
 		super(Doc, self).__init__(*args, **kwargs)
 		

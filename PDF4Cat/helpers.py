@@ -5,6 +5,9 @@ from queue import Empty
 def run_in_subprocess(func):
 	"""A decorator adding a kwarg to a function that makes it run in a subprocess.
 	This can be useful when you have a function that may segfault.
+	You can use by call: @PDF4Cat.run_in_subprocess kwargs: run_in_subprocess=True, subprocess_timeout
+	already using in: 
+	PDF4Cat.Converter funcs and PDF4Cat.Doc funcs
 	"""
 	# This functools.wraps command makes this whole thing work
 	# as a well-behaved decorator, maintaining the original function

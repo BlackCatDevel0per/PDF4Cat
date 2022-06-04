@@ -27,7 +27,7 @@ class OCR(PDF4Cat):
 		"""Generator, generate BytesIO object
 		
 		Args:
-			pages (list, optional): List of pages to filter like [1, 3, 5, 15]
+			pages (list, optional): List of pages to select like [1, 3, 5, 15]
 			language (str, optional): Language to ocr (look fitz.pdfocr_tobytes)
 			zoom (float, optional): Zoom image (look fitz.Matrix docs)
 		
@@ -63,7 +63,7 @@ class OCR(PDF4Cat):
 		Args:
 			language (str, optional): Language to ocr (look fitz.pdfocr_tobytes)
 			output_pdf (None, optional): Output pdf file
-			pages (list, optional): List of pages to filter like [1, 3, 5, 15]
+			pages (list, optional): List of pages to select like [1, 3, 5, 15]
 			start_from (int, optional): Enumerate from n
 			zoom (float, optional): Zoom image (look fitz.Matrix docs)
 		"""

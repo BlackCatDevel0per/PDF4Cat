@@ -5,13 +5,36 @@ import zipfile
 from .cat import PDF4Cat
 
 class Splitter(PDF4Cat):
+
+	"""Subclass of PDF4Cat parent class
+	
+	Args:
+		doc_file (None, optional): Document file (for multiple operations, 'use input_doc_list')
+		input_doc_list (list, optional): List of input docs
+		passwd (str, optional): Document password (for crypt/decrypt)
+		progress_callback (None, optional): Progress callback like:
+	
+	Raises:
+		TypeError: If you use doc_file with input_doc_list (you can use only one)
+	"""
+
 	def __init__(self, *args, **kwargs):
 		super(Splitter, self).__init__(*args, **kwargs)
 
-	# Generate name with BytesIO object (it is faster)
+	# (it is faster)
 	def gen_split(self, from_pdf = None, 
 		fpages: str = '{name}_{num}.pdf', 
-		add2num: int = 0) -> tuple: # pdfname & pdfbytes
+		start_from: int = 0) -> tuple: # pdfname & pdfbytes
+		"""Generator, generate name with BytesIO object
+		
+		Args:
+			from_pdf (None, optional): pdf document name (default use main doc from class param)
+			fpages (str, optional): Format pdf filenames
+			start_from (int, optional): Enumerate from n
+		
+		Yields:
+			tuple: filename, BytesIO
+		"""
 		if not from_pdf:
 			from_pdf = self.pdf_open(self.doc_file, passwd=self.passwd)
 		for num in range(from_pdf.page_count): ###
@@ -24,7 +47,7 @@ class Splitter(PDF4Cat):
 			dst.close()
 			del dst
 
-			pdfn = fpages.format(name=self.doc_filename, num=num+add2num)
+			pdfn = fpages.format(name=self.doc_filename, num=num+start_from)
 			pdfp = io_data
 			yield pdfn, pdfp
 
@@ -33,13 +56,20 @@ class Splitter(PDF4Cat):
 		self,
 		out_zip_file: str, 
 		fpages: str = '{name}_{num}.pdf',
-		add2num: int = 0) -> None:
+		start_from: int = 0) -> None:
+		"""Split pages to different pdfs and compress to zip
+		
+		Args:
+			out_zip_file (str): Output zip file
+			fpages (str, optional): Format pdf filenames
+			start_from (int, optional): Enumerate from n
+		"""
 		pdf = self.pdf_open(self.doc_file, passwd=self.passwd)
 
 		# Compression level: zipfile.ZIP_DEFLATED (8) and disable ZIP64 ext.
 		with zipfile.ZipFile(out_zip_file, 'w', zipfile.ZIP_DEFLATED, False) as zf:
 
-			for file_name, io_data in self.gen_split(pdf, fpages, add2num):
+			for file_name, io_data in self.gen_split(pdf, fpages, start_from):
 				zf.writestr(file_name, io_data.getvalue())
 				self.counter += 1 #need enumerate
 				self.progress_callback(self.counter, pdf.page_count)
