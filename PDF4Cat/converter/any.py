@@ -15,11 +15,31 @@ from mammoth import convert as mammoth_convert
 from ..cat import PDF4Cat
 
 class any_doc_convert(PDF4Cat):
+	
+	"""Subclass of PDF4Cat parent class
+	
+	Args:
+		doc_file (None, optional): Document file (for multiple operations, 'use input_doc_list')
+		input_doc_list (list, optional): List of input docs
+		passwd (str, optional): Document password (for crypt/decrypt)
+		progress_callback (None, optional): Progress callback like:
+	
+	Raises:
+		TypeError: If you use doc_file with input_doc_list (you can use only one)
+	"""
+	
 	def __init__(self, *args, **kwargs):
 		super(any_doc_convert, self).__init__(*args, **kwargs)
 
 	@PDF4Cat.run_in_subprocess
+	# need add html to pdf
 	def convert2pdf(self, output_pdf, use_soffice=False): # only for text based pdf and works not for all
+		"""Pdf to any (using PyMuPDF or Libre Office)
+		
+		Args:
+			output_pdf (None, optional): Output pdf file
+			use_soffice (bool, optional): Use Libre Office converter
+		"""
 		if isinstance(output_pdf, str):
 			ext = os.path.splitext(self.doc_filename)[1][1:]
 			if ext in ['docx', 'doc'] and not use_soffice:
@@ -75,6 +95,14 @@ class any_doc_convert(PDF4Cat):
 	
 	# Generate name with BytesIO object (it is faster)
 	def gen_images4conv(self, pdf) -> bytes:
+		"""Generator, generate BytesIO object
+		
+		Args:
+			pdf (None, optional): pdf object (PDF4Cat.open)
+		
+		Yields:
+			bytes: BytesIO
+		"""
 		noOfPages = range(pdf.page_count)
 
 		for pageNo in noOfPages:
@@ -92,6 +120,12 @@ class any_doc_convert(PDF4Cat):
 
 	@PDF4Cat.run_in_subprocess
 	def pdf2pptx(self, output_pptx, A4=True):
+		"""Pdf to pptx (using PyMuPDF)
+		
+		Args:
+			output_pptx (None, optional): Output pptx file
+			A4 (bool, optional): Use Inches for A4 page
+		"""
 		if not output_pptx:
 			output_pptx = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_pptx = os.path.join(os.getcwd(), output_pptx)
@@ -119,6 +153,11 @@ class any_doc_convert(PDF4Cat):
 
 	@PDF4Cat.run_in_subprocess
 	def pdf2docx(self, output_docx):
+		"""Pdf to docx (using PyMuPDF)
+		
+		Args:
+			output_docx (None, optional): Output docx file
+		"""
 		if not output_docx:
 			output_docx = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_docx = os.path.join(os.getcwd(), output_docx)
@@ -138,6 +177,11 @@ class any_doc_convert(PDF4Cat):
 
 	@PDF4Cat.run_in_subprocess
 	def docx2html(self, output_doc, style_map = None):
+		"""docx to html (using PyMuPDF)
+		
+		Args:
+			output_html (None, optional): Output html file
+		"""
 		if not output_doc:
 			output_doc = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		if isinstance(output_doc, str):
@@ -166,6 +210,11 @@ class any_doc_convert(PDF4Cat):
 
 	@PDF4Cat.run_in_subprocess
 	def docx2pdf(self, output_pdf):
+		"""docx to pdf (using PyMuPDF [docx=>html=>pdf])
+		
+		Args:
+			output_pdf (None, optional): Output pdf file
+		"""
 		if not output_pdf:
 			output_pdf = os.path.join(self.doc_path, self.doc_name+"_out.pdf")
 		output_pdf = os.path.join(os.getcwd(), output_pdf)

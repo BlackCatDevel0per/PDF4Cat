@@ -9,6 +9,36 @@ Class bases
    :undoc-members:
    :show-inheritance:
 
+.. autoclass:: PDF4Cat.any.convert2pdf
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: PDF4Cat.any.gen_images4conv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: PDF4Cat.any.pdf2pptx
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: PDF4Cat.any.pdf2docx
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: PDF4Cat.any.docx2html
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: PDF4Cat.any.docx2pdf
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 .. autoclass:: PDF4Cat.converter.Img2Pdf
    :members:
    :undoc-members:
