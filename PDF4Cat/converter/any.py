@@ -45,6 +45,8 @@ class any_doc_convert(PDF4Cat):
 			if ext in ['docx', 'doc'] and not use_soffice:
 				self.docx2pdf(output_pdf)
 				return
+			elif ext in ['png', 'jpg'] and not use_soffice:
+				self.img2pdf(output_pdf)
 			elif "."+ext in self.libre_exts and use_soffice:
 				self.soffice_convert2pdf(output_pdf)
 				return
