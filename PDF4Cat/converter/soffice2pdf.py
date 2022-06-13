@@ -29,10 +29,10 @@ class soffice_convert(PDF4Cat):
 			doc_type (str): Output document type to convert
 			output_doc (str): Output document file
 		"""
-		temp_pdf = os.path.join(tempfile.gettempdir(), f"""{self.doc_name}.{doc_type}""")
+		temp_doc = os.path.join(tempfile.gettempdir(), f"""{self.doc_name}.{doc_type}""")
 		subprocess.run(shlex.split(f"""soffice --headless --convert-to {doc_type} {self.doc_file} --outdir {tempfile.gettempdir()}"""), 
 			) # stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		shutil.move(temp_pdf, output_doc)
+		shutil.move(temp_doc, output_doc)
 		
 	def soffice_convert2pdf(self, output_pdf: str):
 		"""Libre Office converter wrapper for convert document to pdf
