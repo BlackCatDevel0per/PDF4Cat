@@ -86,8 +86,8 @@ PDF4Cat.Converter('test_data/pdf2docx.docx').docx2pdf("test_data/docx2pdf.pdf")
 PDF4Cat.Converter('test_data/test.png').img2pdf('test_data/img2pdf.pdf')
 # Convert multiple images to pdf
 PDF4Cat.Converter(None, imgfilenames).imgs2pdf('test_data/imgs2pdfs.pdf')
-# Convert multiple images to pdfs and compress to zip
-PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdf.zip')
+# # Convert multiple images to pdfs and compress to zip
+# PDF4Cat.Converter(None, imgfilenames).imgs2pdfs_zip('test_data/imgs2pdf.zip')
 
 # Convert pdf to images and compress to zip
 PDF4Cat.Converter(filenames[0]).pdf2imgs_zip('test_data/pdf2imgs.zip')

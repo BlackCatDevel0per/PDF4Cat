@@ -64,7 +64,8 @@ class soffice_convert(PDF4Cat):
 		if not a:
 			a = 1
 		# soffice --headless --convert-to pdf:"writer_pdf_Export:SelectPdfVersion=1" --outdir outdir input.pdf
-		if self.doc_fileext in self.libre_exts:
+		# if self.doc_fileext in self.libre_exts:
+		if self.doc_fileext == '.pdf':
 			temp_pdf = os.path.join(tempfile.gettempdir(), f"""{self.doc_name}.pdf""")
 			subprocess.run(shlex.split(f"""soffice --headless --convert-to pdf:"writer_pdf_Export:SelectPdfVersion={a}" {self.doc_file} --outdir {tempfile.gettempdir()}"""), 
 				stdout=subprocess.PIPE, stderr=subprocess.PIPE)
