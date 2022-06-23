@@ -138,7 +138,8 @@ class Pdf2Img(PDF4Cat):
 		# self.pdf = self.pdf_open(self.doc_file, password=self.passwd)
 
 	# (it is faster)
-	def gen_imagesp2i(self, pages: list = [], 
+	def gen_imagesp2i(self, 
+		pages: list = [], 
 		fimages: str = '{name}_{num}.png', 
 		start_from: int = 0, 
 		zoom: float = 1.5) -> tuple:

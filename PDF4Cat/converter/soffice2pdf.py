@@ -55,7 +55,7 @@ class soffice_convert(PDF4Cat):
 		"""Libre Office converter wrapper for convert document to pdf/a
 		
 		Args:
-			a (int): A type (1, 2)
+			a (int): A type (0, 1) [0 - pdf 1.4; 1 - pdf/a]
 			output_pdf (str): Output pdf file
 		
 		Raises:
