@@ -103,7 +103,7 @@ class PDF4Cat:
 			object: fitz.fitz.Document
 		"""
 		fo = fitz.open(filename, stream)
-		if fo.needsPass:
+		if fo.needs_pass:
 			fo.authenticate(passwd)
 
 		return fo
